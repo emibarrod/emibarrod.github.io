@@ -2,6 +2,7 @@ body {
   font-family: Palatino, Georgia, Times, "Times New Roman", serif;
   font-size: 24px;
   background-color: white;
+  text-size-adjust: none;
 }
 
 
@@ -16,13 +17,13 @@ body {
   flex-direction: column;
   align-items: center;
   
-  width: 50vw;
+  width: 100vw;
   margin-top: 2vh;
   margin-bottom: 2vh;
 }
 
 #article-preview {
-  width: 50vw;
+  width: 75vw;
   justify-content: center;
   padding-left: 1vw;
   padding-right: 1vw;
@@ -63,6 +64,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  text-align: center;
   background-color: #FFE357;
   margin-top: 0%;
   margin-bottom: 0%;
@@ -83,6 +85,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  text-align: center;
   background-color: rgb(25, 0, 255);
 }
 
@@ -100,7 +103,7 @@ body {
 
 #article {
   justify-content: center;
-  width: 50vw;
+  width: 75vw;
   background-color: white;
   margin-top: 2vh;
   margin-bottom: 2vh;
@@ -133,7 +136,7 @@ ul {
 }
 
 hr {
-  width: 50vw;
+  width: 75vw;
   color: beige;
 }
 
