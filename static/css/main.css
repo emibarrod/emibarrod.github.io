@@ -1,10 +1,22 @@
 body {
-  font-family: Palatino, Georgia, Times, "Times New Roman", serif;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-size: 24px;
   background-color: white;
-  text-size-adjust: none;
+  margin-left: 0vw;
+  margin-right: 0vw;
+  margin-top: 0vh;
 }
 
+h1 {
+  font-size: 40px;
+  margin: 0;
+  font-weight:400;
+}
+
+h2 {
+  font-size: 35px;
+  font-weight:500;
+}
 
 #index-div {
   display: flex;  
@@ -16,14 +28,13 @@ body {
   display: flex;  
   flex-direction: column;
   align-items: center;
-  
   width: 100vw;
   margin-top: 2vh;
   margin-bottom: 2vh;
 }
 
 #article-preview {
-  width: 75vw;
+  width: 60vw;
   justify-content: center;
   padding-left: 1vw;
   padding-right: 1vw;
@@ -62,17 +73,34 @@ body {
 
 #web-title {
   display: flex;
+  width:100%;
+  height: 7vh;
   flex-direction: row;
   justify-content: center;
-  text-align: center;
+  align-items: center;
   background-color: #FFE357;
-  margin-top: 0%;
-  margin-bottom: 0%;
+}
+
+#web-title-div {
+  display: flex;
+  width:95vw;
+  height: 6vh;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 #web-title-text {
+  font-size: 35px;
   text-decoration-line:none;
   color:black;
+  height: 6vh;
+  width: 100%;
+}
+
+#title-image {
+  height: 6vh;
+  margin-right: 1vw;
 }
 
 .inline-navbar {
@@ -84,14 +112,19 @@ body {
 #navbar {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  background-color: rgb(25, 0, 255);
+  justify-items: center;
+  height: 100%;
+  font-weight:400;
 }
 
+.navbar-div {
+  display: flex;
+  margin-left: 4vw;
+  align-items: center;
+}
 
 #navbar-link {
-  color: white;
+  color: rgb(113, 113, 113);
   text-decoration-line:none;
 }
 
@@ -99,6 +132,10 @@ body {
   display: flex;  
   flex-direction: column;
   align-items: center;
+}
+
+.article-title {
+  text-align: center;
 }
 
 #article {
@@ -117,7 +154,7 @@ body {
 
 /* mouse over link */
 #navbar-link:hover {
-  color: #FFE357;
+  color: #444444;
 }
 
 #post-link {
@@ -127,16 +164,17 @@ body {
 
 /* mouse over link */
 #post-link:hover {
-  color: #FFE357;
+  color: black;
 }
 
 ul {
+  text-align: center;
   margin-top: 0%;
   margin-bottom: 0%;
 }
 
 hr {
-  width: 75vw;
+  width: 62vw;
   color: beige;
 }
 
@@ -144,4 +182,34 @@ hr {
   margin-left: 1vw;
   margin-top: 1vh;
   margin-bottom: 1vh;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    /*font-family: Palatino, Georgia, Times, "Times New Roman", serif;*/
+    font-size: 3.75vw;
+  }
+
+  h1 {
+    font-size: 8vw;
+  }
+
+  h2 {
+    font-size: 6vw;
+  }
+
+  #article-preview {
+    width: 80vw;
+  }
+
+  hr {
+    width: 82vw;
+  }
+  #web-title-text {
+    font-size: 6vw;
+  }
+  .navbar-div {
+    font-size: 4.5vw;
+  }
+  
 }
