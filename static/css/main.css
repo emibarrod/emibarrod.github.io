@@ -432,7 +432,6 @@ h4 {
 .toc ul li a:hover {
   color: #FFE357;
   transition: color .4s;
-  border-bottom: 1px solid #FFE357;
 }
 
 .toc ul li ul {
@@ -455,7 +454,6 @@ h4 {
 .toc ul li ul a:hover {
   color: #FFE357;
   transition: color .4s;
-  border-bottom: 1px solid #FFE357;
 }
 
 /* QUOTES */
@@ -487,6 +485,34 @@ blockquote p {
 @media screen and (max-width: 600px) {
   .mobile-display {
     display:contents;
+  }
+
+  a:hover {
+    color: #939393;
+  }
+
+  .index-div a:hover {
+    color: black;
+  }
+
+  .article-page-div a:hover {
+    color: black;
+  }
+
+  .about-me p a:hover {
+    color: #939393;
+  }
+
+  .navbar a:hover {
+    color: rgb(113, 113, 113);
+  }
+
+  .toc ul li a:hover {
+    color: black;
+  }
+
+  .toc ul li ul a:hover {
+    color: #939393;
   }
 
   body {
