@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Emilio Barragán</title><link href="https://emibarrod.com/" rel="alternate"></link><link href="https://emibarrod.com/feeds/all.atom.xml" rel="self"></link><id>https://emibarrod.com/</id><updated>2022-02-26T00:00:00+01:00</updated><entry><title>Cómo crear un blog usando Pelican y GitHub Pages</title><link href="https://emibarrod.com/crear-blog-usando-pelican-github-pages.html" rel="alternate"></link><published>2022-02-26T00:00:00+01:00</published><updated>2022-02-26T00:00:00+01:00</updated><author><name>Emilio Barragán</name></author><id>tag:emibarrod.com,2022-02-26:/crear-blog-usando-pelican-github-pages.html</id><summary type="html">&lt;p&gt;En este tutorial veremos cómo crear un blog personal usando Pelican (un generador de sitios web estáticos) y GitHub Pages (servidor para sitios web estáticos alojado en GitHub).&lt;/p&gt;</summary><content type="html">&lt;div class="toc"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#requisitos-previos"&gt;Requisitos previos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#introduccion"&gt;Introducción&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#que-es-un-sitio-estatico"&gt;¿Qué es un sitio estático?&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#diferencias-respecto-a-sitios-dinamicos"&gt;Diferencias respecto a sitios dinámicos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#cuando-usar-cada-uno"&gt;¿Cuándo usar cada uno?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#pelican"&gt;Pelican&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#caracteristicas"&gt;Características&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#instalacion"&gt;Instalación&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#creando-nuestro-proyecto"&gt;Creando nuestro proyecto&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#escribiendo-contenido"&gt;Escribiendo contenido&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#anadir-imagenes"&gt;Añadir imágenes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#desplegar-pelican-en-local"&gt;Desplegar Pelican en local&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#instalando-temas"&gt;Instalando temas&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#creando-nuestro-tema-personalizado"&gt;Creando nuestro tema personalizado&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#estructura"&gt;Estructura&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#creacion-de-plantillas"&gt;Creación de plantillas&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#anadiendo-css"&gt;Añadiendo CSS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#renderizando-codigo-con-pygments"&gt;Renderizando código con Pygments&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#resumen"&gt;Resumen&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#github-pages"&gt;GitHub Pages&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#caracteristicas_1"&gt;Características&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#configurando-github-pages"&gt;Configurando GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#configurando-pelican-para-publicar"&gt;Configurando Pelican para publicar&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h2 id="requisitos-previos"&gt;Requisitos previos&lt;/h2&gt;
+&lt;p&gt;Este tutorial presupone que tienes algo de experiencia con Python y, al menos, lo tienes instalado. También se supone que tienes manejo de la terminal y que usas Linux. Estaría bien que tuvieses algunos conocimientos de &lt;code&gt;git&lt;/code&gt;. &lt;a href="https://rogerdudler.github.io/git-guide/index.es.html" target="_blank"&gt;Aquí&lt;/a&gt; puedes darle un repaso. Si usas Windows, no lo uses e instala WSL2. Aquí tienes una guía &lt;a href="https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview" target="_blank"&gt;para Windows 10&lt;/a&gt; y otra &lt;a href="https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview" target="_blank"&gt;para Windows 11&lt;/a&gt;. Por último, deberías tener algunos conocimientos de HTML y CSS para aprovechar al máximo este tutorial.&lt;/p&gt;
+&lt;p&gt;Yo estoy usando &lt;code&gt;Ubuntu 22.04.1&lt;/code&gt; con &lt;code&gt;Python3.10&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="introduccion"&gt;Introducción&lt;/h2&gt;
+&lt;p&gt;Creando este blog me encontré con que la documentación de Pelican es un poco difusa. Es por eso que quería plasmar todos los pasos que yo he seguido para crear mi página. En este post veremos qué es Pelican, qué es GitHub Pages y cómo usar ambos para crear nuestro sitio online totalmente gratis (costará tiempo, eso sí).&lt;/p&gt;
+&lt;h3 id="que-es-un-sitio-estatico"&gt;¿Qué es un sitio estático?&lt;/h3&gt;
+&lt;p&gt;Un sitio estático no es más que un conjunto de archivos HTML, CSS e imágenes. Es una página que no cambia: lo que está en los archivos es lo que hay. Un ejemplo de sitio estático es en el que estás ahora mismo, ya que está creado con Pelican. De hecho, si navegas hasta &lt;a href="https://github.com/emibarrod/emibarrod.github.io" target="_blank"&gt;mi repositorio&lt;/a&gt;, podrás ver absolutamente todos los archivos de los que se compone la página.&lt;/p&gt;
+&lt;h4 id="diferencias-respecto-a-sitios-dinamicos"&gt;Diferencias respecto a sitios dinámicos&lt;/h4&gt;
+&lt;p&gt;Los sitios dinámicos nos permiten, entre otras cosas, ejecutar scripts y funciones o modificar modelos de datos. Ejemplos de sitios dinámicos son los creados con &lt;a href="https://www.djangoproject.com/" target="_blank"&gt;Django&lt;/a&gt;. En estas páginas podemos introducir y borrar datos, así como ejecutar bloques de código de nuestro backend.&lt;/p&gt;
+&lt;h4 id="cuando-usar-cada-uno"&gt;¿Cuándo usar cada uno?&lt;/h4&gt;
+&lt;p&gt;Si quieres hacer una página que almacene datos que introduzcan los usuarios o ejecute código, como por ejemplo &lt;a href="https://www.linkedin.com/in/emibarrod/" target="_blank"&gt;LinkedIn&lt;/a&gt; (spam de mi perfil de LinkedIn), lo que buscas es un sitio dinámico. Si quieres simplemente hacer un sitio que muestre contenido, sin duda un sitio estático es para tí.  &lt;/p&gt;
+&lt;p&gt;Los sitios dinámicos son mucho más complejos y difíciles de construir. Por lo tanto, si lo que buscas es publicar artículos y poco más (como es mi caso), un sitio estático te ahorra muchos dolores de cabeza.&lt;/p&gt;
+&lt;h2 id="pelican"&gt;Pelican&lt;/h2&gt;
+&lt;p&gt;Pelican es un generador de sitios estáticos que no necesita hacer uso de bases de datos ni de servidores para su despliegue. Traduciendo de &lt;a href="https://getpelican.com/" target="_blank"&gt;su página oficial&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Pelican tiene todo lo necesario para crear tu sitio estático. Los despliegues son rápidos y está bien diseñado.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="caracteristicas"&gt;Características&lt;/h3&gt;
+&lt;p&gt;Pelican tiene muchísimas características y utilidades. Las más interesantes son:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Puedes escribir los posts en &lt;a href="https://www.writethedocs.org/guide/writing/reStructuredText/" target="_blank"&gt;reStructuredText&lt;/a&gt; o en &lt;a href="https://markdown.es/" target="_blank"&gt;Markdown&lt;/a&gt;:  &lt;/p&gt;
+&lt;p&gt;Esta es para mí una de las características más importantes ya que gracias a esto podemos escribir todo nuestro contenido sin necesidad de usar HTML (aunque más tarde lo usaremos para definir las plantillas de nuestro sitio).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Temas:  &lt;/p&gt;
+&lt;p&gt;En Pelican podemos usar temas predefinidos o hechos por la comunidad con pocos clicks y tendríamos un sitio bonito en poco tiempo. Aún así lo más interesante es que nosotros podemos crear nuestros propios temas (básicamente es definir nuestro css) para darle un aspecto mucho más personal a nuestra página. En estos temas también tenemos acceso al uso de plantillas &lt;a href="https://jinja.palletsprojects.com/en/3.1.x/" target="_blank"&gt;Jinja2&lt;/a&gt;, de las cuales hablaremos más adelante y seguro que os gustan.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Resaltado de código:  &lt;/p&gt;
+&lt;p&gt;Gracias a &lt;a href="https://pygments.org/" target="_blank"&gt;Pygments&lt;/a&gt; podemos, de manera fácil, crear un estilo para el código que escribamos en nuestros posts. Perfecto para blogs o sitios que vayan a estar enfocados en programación, data sience, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Para el listado completo de características ver el &lt;a href="https://getpelican.com/#:~:text=Quickstart-,Features,-Pelican%20has%20everything" target="_blank"&gt;apartado &lt;em&gt;Features&lt;/em&gt; de su sitio oficial&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A continuación, empezaremos a construir nuestro sitio. Para ello seguiremos la &lt;a href="https://docs.getpelican.com/en/4.8.0/quickstart.html" target="_blank"&gt;guía quickstart de Pelican&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id="instalacion"&gt;Instalación&lt;/h3&gt;
+&lt;p&gt;Lo primero que deberemos hacer es crear un entorno virtual usando Python (en mi caso estoy usando Python 3.10), activarla y ejecutar el siguiente comando en nuestra terminal:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;pelican[markdown]&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Si no sabes cómo crear un entorno virtual, &lt;a href="https://www.freecodecamp.org/espanol/news/entornos-virtuales-de-python-explicados-con-ejemplos/" target="_blank"&gt;aquí tienes un tutorial&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id="creando-nuestro-proyecto"&gt;Creando nuestro proyecto&lt;/h3&gt;
+&lt;p&gt;Deberemos crear una carpeta para nuestro proyecto. En mi caso la voy a llamar &lt;code&gt;blog&lt;/code&gt; así que ejecuto el siguiente comando en la terminal para crear y acceder a mi carpeta (asegúrate de que estás en el directorio en el que quieres crear el proyecto):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;mkdir blog
+cd blog
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Una vez dentro de nuestra carpeta, ejecutamos el comando que generará toda la estructura de nuestro sitio:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pelican-quickstart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Después de ejecutarlo nos aparecerán distintas opciones que tendremos que elegir. Aquí os dejo lo que tenéis que poner (si no hay respuesta simplemente tenéis que pulsar enter):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Welcome to pelican-quickstart v4.8.0.
+
+This script will help you create a new Pelican-based website.
+
+Please answer the following questions so this script can generate the files
+needed by Pelican.
+
+
+&amp;gt; Where do you want to create your new web site? [.] 
+&amp;gt; What will be the title of this web site? Emilio Barragán
+&amp;gt; Who will be the author of this web site? Emilio Barragán
+&amp;gt; What will be the default language of this web site? [en] es
+&amp;gt; Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) 
+&amp;gt; What is your URL prefix? (see above example; no trailing slash) https
+&amp;gt; Do you want to enable article pagination? (Y/n) 
+&amp;gt; How many articles per page do you want? [10] 3
+&amp;gt; What is your time zone? [Europe/Rome] Europe/Madrid
+&amp;gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) 
+&amp;gt; Do you want to upload your website using FTP? (y/N) 
+&amp;gt; Do you want to upload your website using SSH? (y/N) 
+&amp;gt; Do you want to upload your website using Dropbox? (y/N) 
+&amp;gt; Do you want to upload your website using S3? (y/N) 
+&amp;gt; Do you want to upload your website using Rackspace Cloud Files? (y/N) 
+&amp;gt; Do you want to upload your website using GitHub Pages? (y/N) y
+&amp;gt; Is this your personal page (username.github.io)? (y/N) y
+Done. Your new project is available at /home/emibarrod/blog
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Si hemos hecho todo bien hasta ahora, ya tendríamos una carpeta llamada &lt;code&gt;blog&lt;/code&gt; con el siguiente contenido:&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/estructura-basica-pelican.png'&gt;&lt;/p&gt;
+&lt;h3 id="escribiendo-contenido"&gt;Escribiendo contenido&lt;/h3&gt;
+&lt;p&gt;El siguiente paso es escribir nuestro primer post. Para ello no tenemos más que crear un archivo Markdown en la carpeta &lt;code&gt;content&lt;/code&gt; dentro de nuestro proyecto. El contenido del archivo tiene que seguir la siguiente estructura:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Title: Mi primer post
+Date: 2022-02-26
+Tags: post
+Slug: mi-primer-post
+Summary: Resumen de mi primer post.
+
+Contenido de mi post.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Vamos por partes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Title&lt;/code&gt;: Es el título que tendrá nuestro post.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Date&lt;/code&gt;: La fecha en la que escribimos o publicamos el post.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Tags&lt;/code&gt;: Son los distintas etiquetas o temas que trata nuestro post.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Slug&lt;/code&gt;: Cómo aparecerá el nombre de nuestro post en la URL.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Summary&lt;/code&gt;: Un breve resumen del contenido del artículo.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Estos elementos los podremos usar luego en las plantillas de Jinja2 para obtener información y contenido de nuestro post, y poder mostrarlo en la página. Puedes quitar o añadir más elementos. Yo uso estos. Para más información leer el apartado &lt;a href="https://docs.getpelican.com/en/4.8.0/content.html" target="_blank"&gt;&lt;em&gt;"Writing content"&lt;/em&gt;&lt;/a&gt; de la documentación de Pelican.&lt;/p&gt;
+&lt;p&gt;Una vez hayamos terminado de rellenar nuestro post, lo guardamos y ejecutamos lo siguiente en la terminal:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pelican content
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Lo cual nos creará una carpeta llamada output en la raíz de nuestro proyecto. En esta carpeta estarán todos los archivos estáticos que generará Pelican y de los que está compuesta nuestra página: HTML, CSS, imágenes...&lt;/p&gt;
+&lt;h4 id="anadir-imagenes"&gt;Añadir imágenes&lt;/h4&gt;
+&lt;p&gt;Para añadir imágenes a nuestros posts:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Primero deberemos crear la subcarpeta &lt;code&gt;images&lt;/code&gt; dentro de la carpeta &lt;code&gt;content&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Al final del archivo de configuración &lt;code&gt;pelicanconf.py&lt;/code&gt; tenemos que añadir lo siguiente:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;STATIC_PATHS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;images&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+&lt;li&gt;En la carpeta &lt;code&gt;images&lt;/code&gt; metemos todas las imágenes que vayamos a usar en nuestros artículos.&lt;/li&gt;
+&lt;li&gt;Para que la imagen se refleje en el post, no tenemos que hacer nada más que escribirlo en Markdown. Por ejemplo, para añadir una imagen a nuestro post anterior, sería así:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Title: Mi primer post
+Date: 2022-02-26
+Tags: post
+Slug: mi-primer-post
+Summary: Resumen de mi primer post.
+
+Contenido de mi post. A continuación introduciré una imagen:
+[imagen](images/perrito.jpg)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Cómo aparece la imagen en la página depende del tema que estemos usando.&lt;/p&gt;
+&lt;h3 id="desplegar-pelican-en-local"&gt;Desplegar Pelican en local&lt;/h3&gt;
+&lt;p&gt;Para desplegar nuestro sitio, una vez generados nuestros archivos estáticos, simplemente debemos escribir el siguiente comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;autoreload&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;listen&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;El argumento --listen desplegará nuestro sitio en local y el argumento --autoreload hará que, cuando guardemos un cambio en nuestro blog, actualice nuestro despliegue actual automáticamente. Una vez hecho esto, podemos escribir en nuestro buscador &lt;code&gt;http://127.0.0.1:8000&lt;/code&gt; y nos debería aparecer algo como esto:&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/mi-primer-post.png'&gt;&lt;/p&gt;
+&lt;p&gt;Si eres capaz de ver lo mismo que yo... ¡enhorabuena! Ya tienes un sitio estático desplegado en local.&lt;/p&gt;
+&lt;h3 id="instalando-temas"&gt;Instalando temas&lt;/h3&gt;
+&lt;p&gt;El aspecto que tiene nuestro sitio por defecto es un poco... feo. Podemos descargar un tema más bonito desde el repositorio de pelican &lt;a href="https://github.com/getpelican/pelican-themes" target="_blank"&gt;pelican-themes&lt;/a&gt;. Como es un poco difícil ver uno a uno los temas, hay una página que los lista y muestra una preview: &lt;a href="http://pelicanthemes.com" target="_blank"&gt;pelicanthemes.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;El proceso es sencillo:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Elegimos el tema que queremos, ya sea por el repositorio de &lt;code&gt;pelican-themes&lt;/code&gt; o por la página que lista los temas. En mi caso voy a elegir uno llamado &lt;code&gt;aboutwilson&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/tema-predefinido-elegido.png'&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Entramos a la carpeta del tema que hemos elegido. En mi caso, como estoy usando la página del listado, pulso en el nombre del tema y me lleva al repositorio.&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/repositorio-tema-elegido.png'&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lo descargamos copiando la URL de la carpeta y pegándola en &lt;a href="https://download-directory.github.io/" target="_blank"&gt;Download Directory&lt;/a&gt;. Si quieres puedes clonar todo el repositorio de &lt;code&gt;pelican-themes&lt;/code&gt; y copiar la carpeta que te interese en vez de usar este método.&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/descargar-tema-elegido.png'&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Se te descargará un zip. Tienes que guardarlo en la raíz de tu proyecto y descomprimirlo a una carpeta con el nombre del tema. En mi caso, la carpeta donde descomprimiré todo se llama &lt;code&gt;aboutwilson&lt;/code&gt;. Luego puedes borrar el zip. La estructura de tu proyecto ahora debería ser la siguiente:&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/estructura-con-tema.png'&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Por último, tenemos que ir a nuestro archivo &lt;code&gt;pelicanconf.py&lt;/code&gt; y añadir las siguientes líneas al final:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;./aboutwilson&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;THEME_STATIC_DIR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;THEME_STATIC_PATHS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;static&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Ahora solo nos queda ir a la terminal y escribir el comando &lt;code&gt;pelican --listen --autoreload&lt;/code&gt; (si ya lo estabas ejecutando no hace falta, cuando guardes el archivo de configuración se recargará tu página). De esta manera ya tendremos nuestro tema listo.&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/tema-elegido-funcionando.png'&gt;&lt;/p&gt;
+&lt;h3 id="creando-nuestro-tema-personalizado"&gt;Creando nuestro tema personalizado&lt;/h3&gt;
+&lt;p&gt;Usar un tema predefinido está bien: es fácil y rápido. Pero que tu web tenga el mismo aspecto que otras no te hace destacar. Es por ello que vamos a crear nuestro propio tema.&lt;/p&gt;
+&lt;p&gt;Para crear un tema vamos a necesitar saber CSS y HTML ya que lo que haremos será desarrollo frontend puro y duro. Si no sabéis CSS ni HTML no pasa nada, hay miles de tutoriales online y, mientras aprendéis, podéis usar los temas predefinidos sin problema.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;ATENCIÓN&lt;/strong&gt;: A partir de aquí, mientras estemos creando el tema, debéis sustituir &lt;code&gt;emibarrod&lt;/code&gt; por el nombre de vuestro tema, Si no, no os funcionará.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id="estructura"&gt;Estructura&lt;/h4&gt;
+&lt;p&gt;Lo primero que debemos hacer es crear, en la raíz de nuestro proyecto, una carpeta con el nombre que le queramos dar a nuestro tema. Yo lo llamaré &lt;code&gt;emibarrod&lt;/code&gt;. Aquí guardaremos todo el contenido del tema. Dentro de esta carpeta crearemos dos más: &lt;code&gt;static&lt;/code&gt; y &lt;code&gt;templates&lt;/code&gt;. Por último, dentro de la carpeta &lt;code&gt;static&lt;/code&gt;, crearemos una subcarpeta llamada &lt;code&gt;css&lt;/code&gt;. El uso de las carpetas es el siguiente:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;static&lt;/code&gt; : Almacenará los ficheros estáticos. En este caso solo será la carpeta de los CSS.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;templates&lt;/code&gt; : Almacenará las plantillas HTML que usaremos para generar nuestro sitio.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;css&lt;/code&gt; : Almacenará los archivos CSS de nuestro sitio.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Una vez terminada la estructura procedemos a crear los ficheros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;emibarrod/static/css/main.css&lt;/code&gt; : Donde estará todo el estilo de nuestra página.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;emibarrod/templates/article.html&lt;/code&gt; : Plantilla para todos los artículos que escribamos.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;emibarrod/templates/base.html&lt;/code&gt; : HTML base que usarán casi todas las demás plantillas.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;emibarrod/templates/index.html&lt;/code&gt; : Página principal que listará todos nuestros posts.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;emibarrod/templates/pagination.html&lt;/code&gt; : Plantilla que usaremos para la paginación de los artículos.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Nuestra estructura debería quedar tal que así:&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/estructura-tema.png'&gt;&lt;/p&gt;
+&lt;h4 id="creacion-de-plantillas"&gt;Creación de plantillas&lt;/h4&gt;
+&lt;p&gt;Antes de nada, para que nuestro tema personalizado funcione, tenemos que cambiar la siguiente línea en nuestro archivo de configuración &lt;code&gt;pelicanconf.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;./emibarrod&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Recuerda cambiar &lt;code&gt;emibarrod&lt;/code&gt; por el nombre de tu tema.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Para que aprendas cómo crear una plantilla vamos a rellenar las que hemos creado anteriormente: &lt;code&gt;base.html&lt;/code&gt;, &lt;code&gt;index.html&lt;/code&gt;, &lt;code&gt;article.html&lt;/code&gt; y &lt;code&gt;pagination.html&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;En las plantillas, Pelican usa &lt;a href="https://jinja.palletsprojects.com/en/latest/" target="_blank"&gt;Jinja2&lt;/a&gt; como &lt;em&gt;templating engine&lt;/em&gt;. Para los familiarizados con Django, es muy parecido al &lt;a href="https://docs.djangoproject.com/en/4.1/ref/templates/language/" target="_blank"&gt;lenguaje de plantillas de Django&lt;/a&gt;. Esto nos permite enriquecer mucho más nuestros HTML. En esta guía no profundizaremos mucho en Jinja2, pero puedes leerte el &lt;a href="https://jinja.palletsprojects.com/en/latest/templates/" target="_blank"&gt;apartado para crear templates&lt;/a&gt; de su documentación.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;base.html&lt;/code&gt; : La página base es donde definiremos el esqueleto de nuestra página.  El código es el siguiente:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt; &lt;span class="na"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;DEFAULT_LANG&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;viewport&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;width=device-width, initial-scale=1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;title&lt;/span&gt; &lt;span class="cp"&gt;%}{{&lt;/span&gt;&lt;span class="nv"&gt;SITENAME&lt;/span&gt;&lt;span class="cp"&gt;}}{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;description&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="s"&gt;Data science and programming.&lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;stylesheet&amp;#39;&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;SITEURL&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;THEME_STATIC_DIR&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;/css/&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;CSS_FILE&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;head&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+      &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="nv"&gt;head&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;web-title-text&amp;#39;&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;SITEURL&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Emilio Barragán&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+    &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt;&lt;span class="cp"&gt;%}&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Como podemos ver, definimos un &lt;code&gt;head&lt;/code&gt; y un &lt;code&gt;body&lt;/code&gt;. Hay que tener en cuenta que todo lo que escribamos en esta plantilla se verá en cualquier parte de nuestra página. Dentro del head usamos Jinja2 para insertar un par de bloques:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;    &lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;head&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;    &lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="nv"&gt;head&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="x"&gt;    &lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;    &lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt;&lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;En estos bloques insertaremos código en las distintas plantillas que hereden de la base. Dicho código aparecerá exactamente donde lo hemos definido en esta plantilla.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;index.html&lt;/code&gt; : Esta página indexará los artículos que tengamos escritos. El código sería el siguiente:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;extends&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;base.html&amp;#39;&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;article&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;articles_page.object_list&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;h2&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;article-preview-title&amp;#39;&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;SITEURL&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;article.url&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt; &lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;article.title&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;content-text&amp;#39;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt; &lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;article.summary&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;hr&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endfor&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+
+  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;articles_page.has_other_pages&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+    &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;include&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pagination.html&amp;#39;&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+  &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;La primera línea nos permite usar &lt;code&gt;base.html&lt;/code&gt; como base para esta página. Podemos apreciar que abrimos el bloque &lt;code&gt;body&lt;/code&gt;. Todo lo que escribamos dentro de este bloque aparecerá dentro del bloque &lt;code&gt;body&lt;/code&gt; de nuestra página base. Nosotros vamos a meter un bucle para recorrer todos nuestros artículos y mostrar su título con un enlace, y el resumen del mismo.&lt;/p&gt;
+&lt;p&gt;Si tenemos pelican ejecutando (recuerda el comando &lt;code&gt;pelican --listen --autoreload&lt;/code&gt;) y accedemos a &lt;a href="http://127.0.0.1:8000/index.html" target="_blank"&gt;http://127.0.0.1:8000/index.html&lt;/a&gt; nos encontraremos esto:&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/index-tema-personalizado.png'&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;article.html&lt;/code&gt; : Esta será la plantilla que renderize nuestro artículo. El código es:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;extends&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;base.html&amp;#39;&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;head&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;SITENAME&lt;/span&gt;&lt;span class="cp"&gt;}}&lt;/span&gt; - &lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;article.title&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="nv"&gt;head&lt;/span&gt;&lt;span class="cp"&gt;%}&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+
+&lt;span class="nt"&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;article.title&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;a&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;article.content&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Aquí hacemos lo mismo que en &lt;code&gt;index.html&lt;/code&gt;. Incorporamos la plantilla base y luego añadimos contenido a los bloques &lt;code&gt;head&lt;/code&gt; y &lt;code&gt;body&lt;/code&gt;. En concreto añadiremos el título del post y su contenido. Tras haber escrito este código, nuestro artículo aparecerá de la siguiente forma:&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/article-tema-personalizado.png'&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pagination.html&lt;/code&gt; : Es lo que usaremos para poder pasar de página en caso que tengamos más artículos que nuestro máximo por página. El código es el siguiente:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;DEFAULT_PAGINATION&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;first_page&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;articles_paginator.page&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;last_page&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;articles_paginator.page&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;articles_paginator.num_pages&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;articles_page.has_previous&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;SITEURL&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;first_page.url&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;#8647;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;SITEURL&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;articles_previous_page.url&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;laquo;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+    Página &lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;articles_page.number&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt; / &lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;articles_paginator.num_pages&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;
+    &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;articles_page.has_next&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;SITEURL&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;articles_next_page.url&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;raquo;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;SITEURL&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;/&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;last_page.url&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;#8649;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;No vamos a entrar mucho en detalle sobre esta plantilla pero, en esencia, comprueba si tenemos más páginas antes o después de la actual.
+En caso de tenerlas, creamos unas flechitas (los códigos esos raros) cuyos enlaces son la página siguiente o anterior.&lt;/p&gt;
+&lt;h4 id="anadiendo-css"&gt;Añadiendo CSS&lt;/h4&gt;
+&lt;p&gt;Para añadir CSS a nuestra página, es tan fácil como escibir el código en el archivo &lt;code&gt;emibarrod/static/css/main.css&lt;/code&gt;. No vamos a explicar CSS, pero si escribimos en nuestro archivo el siguiente código, lo veremos reflejado en la página. Aviso, va a ser feo, pero es para que veáis que se puede:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;grey&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;beige&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;web-title-text&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;text-decoration&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;none&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;aliceblue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;brown&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;article-preview-title&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;text-decoration&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;none&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="kc"&gt;black&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="kc"&gt;blanchedalmond&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Esto nos daría el siguiente contenido:&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/tema-con-css.png'&gt;&lt;/p&gt;
+&lt;p&gt;Como podéis comprobar, es feo, pero ahora sabéis que se puede hacer fácil. Solo tenéis que aprender un poco de HTML y CSS.&lt;/p&gt;
+&lt;h4 id="renderizando-codigo-con-pygments"&gt;Renderizando código con Pygments&lt;/h4&gt;
+&lt;p&gt;Cuando instalamos Pelican, se nos instala también algo llamado &lt;a href="https://pygments.org/" target="_blank"&gt;Pygments&lt;/a&gt;. Esto nos permitirá crear estilos para nuestro código (somos data scientist, tenemos que escribir código bonito).&lt;/p&gt;
+&lt;p&gt;Para crear un estilo por defecto, nos vamos a la terminal, activamos el entorno virtual de nuestro proyecto (si estamos usando uno) y accedemos a la carpeta raíz de nuestro blog (en el caso de este tutorial, sería la carpeta blog). Tras esto, escribimos el siguiente comando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pygmentize -S default -f html -a .highlight &amp;gt; emibarrod/static/css/code.css
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Acuérdate de cambiar &lt;code&gt;emibarrod&lt;/code&gt; por el nombre de tu tema.&lt;/p&gt;
+&lt;p&gt;Después de haber hecho este paso, solo nos queda una cosita más. Abrimos el archivo &lt;code&gt;emibarrod/templates/base.html&lt;/code&gt; (que no se os olvide cambiar el nombre de mi tema por el vuestro) y, debajo de la línea 8, insertamos lo siguiente:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;stylesheet&amp;#39;&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/code.css&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Para comprobar que funciona vamos a añadir código a nuestro primer post. Lo abrimos y al final añadimos algo de código. El post quedaría tal que así:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Title: Mi primer post
+Date: 2022-02-26
+Tags: post
+Slug: mi-primer-post
+Summary: Resumen de mi primer post.
+
+Contenido de mi post. A continuación introduciré una imagen:
+![&lt;span class="nt"&gt;imagen&lt;/span&gt;](&lt;span class="na"&gt;images/perrito.jpg&lt;/span&gt;)
+
+&lt;span class="sb"&gt;```python&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello world&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="sb"&gt;```&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Y ahora, cuando guardemos el archivo y vayamos a nuestra página (acuérdate que tienes que tener el comando &lt;code&gt;pelican --listen --autoreload&lt;/code&gt; funcionando para poder ver tu página), veremos esto:&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/tema-personalizado-codigo.png'&gt;&lt;/p&gt;
+&lt;h3 id="resumen"&gt;Resumen&lt;/h3&gt;
+&lt;p&gt;Hasta aquí hemos visto:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Qué es Pelican y GitHub Pages.&lt;/li&gt;
+&lt;li&gt;Qué son los sitios estáticos.&lt;/li&gt;
+&lt;li&gt;Cómo crear nuestro proyecto en Pelican.&lt;/li&gt;
+&lt;li&gt;Cómo crear posts en nuestro blog.&lt;/li&gt;
+&lt;li&gt;Cómo instalar y/o crear temas en Pelican.&lt;/li&gt;
+&lt;li&gt;Cómo añadir CSS para renderizar el código.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ahora nos queda publicar la página para que se pueda ver online. Para ello usaremos GitHub Pages.&lt;/p&gt;
+&lt;h2 id="github-pages"&gt;GitHub Pages&lt;/h2&gt;
+&lt;p&gt;Según la &lt;a href="https://docs.github.com/es/pages/getting-started-with-github-pages/about-github-pages" target="_blank"&gt;página oficial de GitHub&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;GitHub Pages es un servicio de alojamiento de sitio estático que toma archivos HTML, CSS y JavaScript directamente desde un repositorio en GitHub, opcionalmente ejecuta los archivos a través de un proceso de complilación y publica un sitio web.  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Tal y como dice, GitHub Pages sirve para alojar sitios estáticos, por lo tanto es la pareja perfecta para Pelican.&lt;/p&gt;
+&lt;h3 id="caracteristicas_1"&gt;Características&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Puedes crear páginas para tí, para tu organización o para tu proyecto.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Rápido y sencillo de configurar. GitHub Pages se encarga de casi todo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Podemos usar el dominio por defecto (usuario.github.io) o podemos comprar un dominio personalizado, como el de esta página, y usarlo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Se puede configurar nuestro sitio con HTTPS, algo imprescindible hoy en día.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Y lo más importante es que es GRATIS. Aún así, como todo lo gratis, tenemos &lt;a href="https://docs.github.com/es/pages/getting-started-with-github-pages/about-github-pages#usage-limits" target="_blank"&gt;límites de uso&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="configurando-github-pages"&gt;Configurando GitHub Pages&lt;/h3&gt;
+&lt;p&gt;La configuración de GitHub Pages conlleva una serie de pasos:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Si no tienes cuenta de &lt;a href="https://github.com" target="_blank"&gt;GitHub&lt;/a&gt;, crea una.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Una vez tengamos creado nuestro perfil, nos vamos a la pestaña repositorios (repositories en inglés), y creamos un repositorio nuevo.&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/repositorios.png'&gt;
+&lt;img class='content-image' src='images/tutorial_pelican/nuevo-repo.png'&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Debemos ponerle como nombre &lt;code&gt;usuario.github.io&lt;/code&gt;, donde &lt;code&gt;usuario&lt;/code&gt; es tu nombre de usuario. En mi caso &lt;code&gt;emibarrod&lt;/code&gt;. La configuración debe ser la misma que en la siguiente foto:&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/creacion-repo.png'&gt;&lt;/p&gt;
+&lt;p&gt;Una vez configurado, le damos a crear repositorio.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Clonamos el repositorio que acabamos de crear en la misma carpeta que nuestro proyecto. Si nuestro proyecto &lt;code&gt;blog&lt;/code&gt; está en la carpeta &lt;code&gt;proyectos&lt;/code&gt;, deberemos clonar este repo en dicha carpeta. No entraremos en detalle de cómo clonar un repositorio porque hay varias formas. Os dejo &lt;a href="https://docs.github.com/es/repositories/creating-and-managing-repositories/cloning-a-repository" target="_blank"&gt;aquí&lt;/a&gt; una guía.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Cuando tengamos el repositorio clonado en la misma carpeta, solo nos quedaría configurar Pelican.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="configurando-pelican-para-publicar"&gt;Configurando Pelican para publicar&lt;/h3&gt;
+&lt;p&gt;A parte de la configuración que tenemos en el archivo &lt;code&gt;pelicanconf.py&lt;/code&gt;, nos aparece una que se llama &lt;code&gt;publishconf.py&lt;/code&gt;. Este archivo de configuración será el que utilicemos para publicar nuestro sitio al repositorio github.&lt;/p&gt;
+&lt;p&gt;El archivo &lt;code&gt;publishconf.py&lt;/code&gt; debería tener el siguiente aspecto:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# This file is only used if you use `make publish` or&lt;/span&gt;
+&lt;span class="c1"&gt;# explicitly specify it as your config file.&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;curdir&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pelicanconf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+
+&lt;span class="c1"&gt;# If your site is available via HTTPS, make sure SITEURL begins with https://&lt;/span&gt;
+&lt;span class="n"&gt;SITEURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://usuario.github.io&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;RELATIVE_URLS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;OUTPUT_PATH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ruta/al/repo/usuario.github.io&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# FEED_ALL_ATOM = &amp;#39;feeds/all.atom.xml&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;# CATEGORY_FEED_ATOM = &amp;#39;feeds/{slug}.atom.xml&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;DELETE_OUTPUT_DIRECTORY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Following items are often useful when publishing&lt;/span&gt;
+
+&lt;span class="c1"&gt;#DISQUS_SITENAME = &amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#GOOGLE_ANALYTICS = &amp;quot;&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SITEURL&lt;/code&gt; tiene que tener el nombre del repositorio que has creado, en mi caso &lt;code&gt;emibarrod.github.io&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OUTPUT_PATH&lt;/code&gt; es el path hasta el repositorio clonado anteriormente.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tras haber creado esta configuración, tendremos que generar nuestro sitio en el nuevo repositorio. Para ello ejecutamos el siguiente comando dentro de la carpeta &lt;code&gt;blog&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pelican -s publishconf.py --theme nombre-del-tema-que-usas
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Una vez hecho esto, podremos comprobar que en la carpeta &lt;code&gt;usuario.github.io&lt;/code&gt; tendremos archivos generados:&lt;/p&gt;
+&lt;p&gt;&lt;img class='content-image' src='images/tutorial_pelican/salida-publish.png'&gt;&lt;/p&gt;
+&lt;p&gt;No pasa nada si ves archivos que tú no tienes, es normal.&lt;/p&gt;
+&lt;p&gt;Ahora solo nos queda añadir los cambios a nuestro repositorio y acceder a &lt;code&gt;https://usuario.github.io&lt;/code&gt; (acuérdate que &lt;code&gt;usuario&lt;/code&gt; es tu usuario de GitHub) y deberías ver tu página. Si no ves aún la página es porque GitHub Pages aún no habrá terminado de construirla, ten paciencia.&lt;/p&gt;
+&lt;p&gt;En próximos posts veremos cómo añadir un favicon a nuestra página, cómo tener un dominio personalizado y muchas cosas más.&lt;/p&gt;
+&lt;p&gt;¡Espero que te haya servido este tutorial! Me harías un gran favor si lo compartes con tus amigos o en redes sociales. ¡Gracias por leerme!&lt;/p&gt;</content><category term="misc"></category><category term="pelican"></category><category term="python"></category><category term="blog"></category><category term="github-pages"></category><category term="github"></category></entry></feed>

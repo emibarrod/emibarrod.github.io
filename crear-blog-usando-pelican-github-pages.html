@@ -157,7 +157,7 @@ Done. Your new project is available at /home/emibarrod/blog
 </code></pre></div>
 
 <p>Si hemos hecho todo bien hasta ahora, ya tendríamos una carpeta llamada <code>blog</code> con el siguiente contenido:</p>
-<p><img class='content-image' src='images/estructura-basica-pelican.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/estructura-basica-pelican.png'></p>
 <h3 id="escribiendo-contenido">Escribiendo contenido</h3>
 <p>El siguiente paso es escribir nuestro primer post. Para ello no tenemos más que crear un archivo Markdown en la carpeta <code>content</code> dentro de nuestro proyecto. El contenido del archivo tiene que seguir la siguiente estructura:</p>
 <div class="highlight"><pre><span></span><code>Title: Mi primer post
@@ -215,7 +215,7 @@ Contenido de mi post. A continuación introduciré una imagen:
 </code></pre></div>
 
 <p>El argumento --listen desplegará nuestro sitio en local y el argumento --autoreload hará que, cuando guardemos un cambio en nuestro blog, actualice nuestro despliegue actual automáticamente. Una vez hecho esto, podemos escribir en nuestro buscador <code>http://127.0.0.1:8000</code> y nos debería aparecer algo como esto:</p>
-<p><img class='content-image' src='images/mi-primer-post.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/mi-primer-post.png'></p>
 <p>Si eres capaz de ver lo mismo que yo... ¡enhorabuena! Ya tienes un sitio estático desplegado en local.</p>
 <h3 id="instalando-temas">Instalando temas</h3>
 <p>El aspecto que tiene nuestro sitio por defecto es un poco... feo. Podemos descargar un tema más bonito desde el repositorio de pelican <a href="https://github.com/getpelican/pelican-themes" target="_blank">pelican-themes</a>. Como es un poco difícil ver uno a uno los temas, hay una página que los lista y muestra una preview: <a href="http://pelicanthemes.com" target="_blank">pelicanthemes.com</a></p>
@@ -223,19 +223,19 @@ Contenido de mi post. A continuación introduciré una imagen:
 <ol>
 <li>
 <p>Elegimos el tema que queremos, ya sea por el repositorio de <code>pelican-themes</code> o por la página que lista los temas. En mi caso voy a elegir uno llamado <code>aboutwilson</code>.</p>
-<p><img class='content-image' src='images/tema-predefinido-elegido.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/tema-predefinido-elegido.png'></p>
 </li>
 <li>
 <p>Entramos a la carpeta del tema que hemos elegido. En mi caso, como estoy usando la página del listado, pulso en el nombre del tema y me lleva al repositorio.</p>
-<p><img class='content-image' src='images/repositorio-tema-elegido.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/repositorio-tema-elegido.png'></p>
 </li>
 <li>
 <p>Lo descargamos copiando la URL de la carpeta y pegándola en <a href="https://download-directory.github.io/" target="_blank">Download Directory</a>. Si quieres puedes clonar todo el repositorio de <code>pelican-themes</code> y copiar la carpeta que te interese en vez de usar este método.</p>
-<p><img class='content-image' src='images/descargar-tema-elegido.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/descargar-tema-elegido.png'></p>
 </li>
 <li>
 <p>Se te descargará un zip. Tienes que guardarlo en la raíz de tu proyecto y descomprimirlo a una carpeta con el nombre del tema. En mi caso, la carpeta donde descomprimiré todo se llama <code>aboutwilson</code>. Luego puedes borrar el zip. La estructura de tu proyecto ahora debería ser la siguiente:</p>
-<p><img class='content-image' src='images/estructura-con-tema.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/estructura-con-tema.png'></p>
 </li>
 <li>
 <p>Por último, tenemos que ir a nuestro archivo <code>pelicanconf.py</code> y añadir las siguientes líneas al final:</p>
@@ -247,7 +247,7 @@ Contenido de mi post. A continuación introduciré una imagen:
 </code></pre></div>
 
 <p>Ahora solo nos queda ir a la terminal y escribir el comando <code>pelican --listen --autoreload</code> (si ya lo estabas ejecutando no hace falta, cuando guardes el archivo de configuración se recargará tu página). De esta manera ya tendremos nuestro tema listo.</p>
-<p><img class='content-image' src='images/tema-elegido-funcionando.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/tema-elegido-funcionando.png'></p>
 <h3 id="creando-nuestro-tema-personalizado">Creando nuestro tema personalizado</h3>
 <p>Usar un tema predefinido está bien: es fácil y rápido. Pero que tu web tenga el mismo aspecto que otras no te hace destacar. Es por ello que vamos a crear nuestro propio tema.</p>
 <p>Para crear un tema vamos a necesitar saber CSS y HTML ya que lo que haremos será desarrollo frontend puro y duro. Si no sabéis CSS ni HTML no pasa nada, hay miles de tutoriales online y, mientras aprendéis, podéis usar los temas predefinidos sin problema.</p>
@@ -286,7 +286,7 @@ Contenido de mi post. A continuación introduciré una imagen:
 </li>
 </ul>
 <p>Nuestra estructura debería quedar tal que así:</p>
-<p><img class='content-image' src='images/estructura-tema.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/estructura-tema.png'></p>
 <h4 id="creacion-de-plantillas">Creación de plantillas</h4>
 <p>Antes de nada, para que nuestro tema personalizado funcione, tenemos que cambiar la siguiente línea en nuestro archivo de configuración <code>pelicanconf.py</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">THEME</span> <span class="o">=</span> <span class="s1">&#39;./emibarrod&#39;</span>
@@ -354,7 +354,7 @@ Contenido de mi post. A continuación introduciré una imagen:
 
 <p>La primera línea nos permite usar <code>base.html</code> como base para esta página. Podemos apreciar que abrimos el bloque <code>body</code>. Todo lo que escribamos dentro de este bloque aparecerá dentro del bloque <code>body</code> de nuestra página base. Nosotros vamos a meter un bucle para recorrer todos nuestros artículos y mostrar su título con un enlace, y el resumen del mismo.</p>
 <p>Si tenemos pelican ejecutando (recuerda el comando <code>pelican --listen --autoreload</code>) y accedemos a <a href="http://127.0.0.1:8000/index.html" target="_blank">http://127.0.0.1:8000/index.html</a> nos encontraremos esto:</p>
-<p><img class='content-image' src='images/index-tema-personalizado.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/index-tema-personalizado.png'></p>
 <ul>
 <li><code>article.html</code> : Esta será la plantilla que renderize nuestro artículo. El código es:</li>
 </ul>
@@ -374,7 +374,7 @@ Contenido de mi post. A continuación introduciré una imagen:
 </code></pre></div>
 
 <p>Aquí hacemos lo mismo que en <code>index.html</code>. Incorporamos la plantilla base y luego añadimos contenido a los bloques <code>head</code> y <code>body</code>. En concreto añadiremos el título del post y su contenido. Tras haber escrito este código, nuestro artículo aparecerá de la siguiente forma:</p>
-<p><img class='content-image' src='images/article-tema-personalizado.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/article-tema-personalizado.png'></p>
 <ul>
 <li><code>pagination.html</code> : Es lo que usaremos para poder pasar de página en caso que tengamos más artículos que nuestro máximo por página. El código es el siguiente:</li>
 </ul>
@@ -418,7 +418,7 @@ En caso de tenerlas, creamos unas flechitas (los códigos esos raros) cuyos enla
 </code></pre></div>
 
 <p>Esto nos daría el siguiente contenido:</p>
-<p><img class='content-image' src='images/tema-con-css.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/tema-con-css.png'></p>
 <p>Como podéis comprobar, es feo, pero ahora sabéis que se puede hacer fácil. Solo tenéis que aprender un poco de HTML y CSS.</p>
 <h4 id="renderizando-codigo-con-pygments">Renderizando código con Pygments</h4>
 <p>Cuando instalamos Pelican, se nos instala también algo llamado <a href="https://pygments.org/" target="_blank">Pygments</a>. Esto nos permitirá crear estilos para nuestro código (somos data scientist, tenemos que escribir código bonito).</p>
@@ -448,7 +448,7 @@ Contenido de mi post. A continuación introduciré una imagen:
 </code></pre></div>
 
 <p>Y ahora, cuando guardemos el archivo y vayamos a nuestra página (acuérdate que tienes que tener el comando <code>pelican --listen --autoreload</code> funcionando para poder ver tu página), veremos esto:</p>
-<p><img class='content-image' src='images/tema-personalizado-codigo.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/tema-personalizado-codigo.png'></p>
 <h3 id="resumen">Resumen</h3>
 <p>Hasta aquí hemos visto:</p>
 <ul>
@@ -492,12 +492,12 @@ Contenido de mi post. A continuación introduciré una imagen:
 </li>
 <li>
 <p>Una vez tengamos creado nuestro perfil, nos vamos a la pestaña repositorios (repositories en inglés), y creamos un repositorio nuevo.</p>
-<p><img class='content-image' src='images/repositorios.png'>
-<img class='content-image' src='images/nuevo-repo.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/repositorios.png'>
+<img class='content-image' src='images/tutorial_pelican/nuevo-repo.png'></p>
 </li>
 <li>
 <p>Debemos ponerle como nombre <code>usuario.github.io</code>, donde <code>usuario</code> es tu nombre de usuario. En mi caso <code>emibarrod</code>. La configuración debe ser la misma que en la siguiente foto:</p>
-<p><img class='content-image' src='images/creacion-repo.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/creacion-repo.png'></p>
 <p>Una vez configurado, le damos a crear repositorio.</p>
 </li>
 <li>
@@ -543,7 +543,7 @@ Contenido de mi post. A continuación introduciré una imagen:
 </code></pre></div>
 
 <p>Una vez hecho esto, podremos comprobar que en la carpeta <code>usuario.github.io</code> tendremos archivos generados:</p>
-<p><img class='content-image' src='images/salida-publish.png'></p>
+<p><img class='content-image' src='images/tutorial_pelican/salida-publish.png'></p>
 <p>No pasa nada si ves archivos que tú no tienes, es normal.</p>
 <p>Ahora solo nos queda añadir los cambios a nuestro repositorio y acceder a <code>https://usuario.github.io</code> (acuérdate que <code>usuario</code> es tu usuario de GitHub) y deberías ver tu página. Si no ves aún la página es porque GitHub Pages aún no habrá terminado de construirla, ten paciencia.</p>
 <p>En próximos posts veremos cómo añadir un favicon a nuestra página, cómo tener un dominio personalizado y muchas cosas más.</p>
