@@ -38,7 +38,6 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;a href="crear-blog-usando-pelican-github-pages-2.html"&gt;Enlace&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="requisitos-previos"&gt;Requisitos previos&lt;/h2&gt;
 &lt;p&gt;Este tutorial presupone que tienes algo de experiencia con Python y, al menos, lo tienes instalado. También se supone que tienes manejo de la terminal y que usas Linux. Estaría bien que tuvieses algunos conocimientos de &lt;code&gt;git&lt;/code&gt;. &lt;a href="https://rogerdudler.github.io/git-guide/index.es.html" target="_blank"&gt;Aquí&lt;/a&gt; puedes darle un repaso. Si usas Windows, no lo uses e instala WSL2. Aquí tienes una guía &lt;a href="https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview" target="_blank"&gt;para Windows 10&lt;/a&gt; y otra &lt;a href="https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview" target="_blank"&gt;para Windows 11&lt;/a&gt;. Por último, deberías tener algunos conocimientos de HTML y CSS para aprovechar al máximo este tutorial.&lt;/p&gt;
 &lt;p&gt;Yo estoy usando &lt;code&gt;Ubuntu 22.04.1&lt;/code&gt; con &lt;code&gt;Python3.10&lt;/code&gt;.&lt;/p&gt;
