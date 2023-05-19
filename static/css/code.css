@@ -3,6 +3,7 @@ code {
     white-space: pre-line;
     word-wrap: break-word;
     text-align: left;
+    font-family: "Source Code Pro", "Fira Code";
 } 
 pre { 
     line-height: 125%; 
