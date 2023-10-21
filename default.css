@@ -20,19 +20,19 @@ pre code.language-python {
 
 /* H1 LINKS */
 
-a.link:link
-{
-   text-decoration: none;
+a.h1-link:link {
+	color:black;
+ 	text-decoration: none;
 }
-a.link:visited
-{
-   text-decoration: none;
+a.h1-link:visited {
+	color:black;
+    text-decoration: none;
 }
-a.link:hover
-{
-   text-decoration: none;
+a.h1-link:hover {
+	color:grey;
+    text-decoration: none;
 }
-a.link:active
-{
-   text-decoration: none;
+a.h1-link:active {
+	color:black;
+    text-decoration: none;
 }
