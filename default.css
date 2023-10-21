@@ -11,9 +11,28 @@ pre code.language-python {
 	padding: 1em;
 	background-color: #f4f4f4;
 	color: #333;
-	font-size: 14px;
+	font-size: medium;
 	font-family: Monaco, monospace;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	overflow-x: auto;
+}
+
+/* H1 LINKS */
+
+a.link:link
+{
+   text-decoration: none;
+}
+a.link:visited
+{
+   text-decoration: none;
+}
+a.link:hover
+{
+   text-decoration: none;
+}
+a.link:active
+{
+   text-decoration: none;
 }
