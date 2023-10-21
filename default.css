@@ -1,28 +1,4 @@
 body {
 	text-align: justify;
-	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
-	font-size: var(--vscode-markdown-font-size, 14px);
-	padding: 0 26px;
-	line-height: var(--vscode-markdown-line-height, 22px);
-	word-wrap: break-word;
-}
-
-.page_break {
-	page-break-after: always;
-}
-
-code {
-	text-align: left;
-}
-
-h1 {
-	font-weight: bold;
-}
-
-h2 {
-	font-weight: bold;
-}
-
-h3 {
-	font-weight: bold;
+	font-family: Arial, sans-serif;
 }
