@@ -1,6 +1,8 @@
 body {
 	text-align: justify;
 	font-family: Arial, sans-serif;
+	margin-left: 2vw;
+	margin-right: 2vw;
 }
 
 pre code.language-python {
