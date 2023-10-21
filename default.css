@@ -6,7 +6,7 @@ body {
 	font-size: medium;
 }
 
-pre code.language-python {
+pre code {
 	display: block;
 	padding: 1em;
 	background-color: #f4f4f4;
@@ -33,6 +33,23 @@ a.h1-link:hover {
     text-decoration: none;
 }
 a.h1-link:active {
+	color:black;
+    text-decoration: none;
+}
+
+a.list-link:link {
+	color:black;
+ 	text-decoration: none;
+}
+a.list-link:visited {
+	color:black;
+    text-decoration: none;
+}
+a.list-link:hover {
+	color:grey;
+    text-decoration: underline;
+}
+a.list-link:active {
 	color:black;
     text-decoration: none;
 }
