@@ -1,7 +1,0 @@
-User-agent: *
-Disallow: /category/
-Disallow: /tag/
-Disallow: /author/
-Disallow: /tags.html
-Disallow: /categories.html
-Disallow: /*-tag.html
