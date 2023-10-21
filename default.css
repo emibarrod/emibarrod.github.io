@@ -2,3 +2,49 @@ body {
 	text-align: justify;
 	font-family: Arial, sans-serif;
 }
+
+pre code.language-python {
+	display: block;
+	padding: 1em;
+	background-color: #f4f4f4;
+	color: #333;
+	font-size: 14px;
+	font-family: Monaco, monospace;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	overflow-x: auto;
+  }
+  
+pre code.language-python::before {
+	content: "Python";
+	display: block;
+	text-align: right;
+	background-color: #333;
+	color: #fff;
+	padding: 2px 6px;
+	font-size: 12px;
+	border-bottom-left-radius: 5px;
+	border-top-right-radius: 5px;
+  }
+  
+pre code.language-python .keyword {
+	color: #0077b3;
+  }
+  
+pre code.language-python .string {
+	color: #e8716a;
+  }
+  
+pre code.language-python .comment {
+	color: #4e9a06;
+	font-style: italic;
+  }
+  
+pre code.language-python .number {
+	color: #ca7846;
+  }
+  
+pre code.language-python .function, pre code.language-python .variable {
+	color: #333;
+  }
+  
