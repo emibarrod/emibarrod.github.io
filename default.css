@@ -1,0 +1,23 @@
+body {
+	text-align: justify;
+}
+
+.page_break {
+	page-break-after: always;
+}
+
+code {
+	text-align: left;
+}
+
+h1 {
+	font-weight: bold;
+}
+
+h2 {
+	font-weight: bold;
+}
+
+h3 {
+	font-weight: bold;
+}
