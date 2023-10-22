@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="default.css" rel="stylesheet">
+    <meta name="description"
+      content="Página personal de Emilio Barragán Rodríguez.">
+    <title>emibarrod</title>
+</head>
+
+<body>
+    <h1>Cuidado con las referencias en Python</h1>
+    <hr>
+    <p>El otro día estaba intentando actualizar el valor de las claves de un diccionario en Python de manera iterativa. Digamos que mi código era el siguiente.</p>
+    <pre><code class="language-python">import random
+
+    dictionary = {
+        0:&quot;a&quot;,
+        1:&quot;b&quot;,
+        2:&quot;c&quot;
+    }
+
+    keys = dictionary.keys()
+
+    for key in keys:
+        new_key = random.randint(3,10)
+        dictionary[new_key] = dictionary[key]
+        del dictionary[key]
+    </code></pre>
+    <p>De primera mano me parecía completamente correcto: saco todas las claves del diccionario e itero sobre ellas para actualizarlas con un número aleatorio entre el 3 y el 10. Por último, borro la clave antigua.
+    Para mi sorpresa, el código me devolvía un error:</p>
+    <pre><code>    for key in keys:
+    RuntimeError: dictionary changed size during iteration
+    </code></pre>
+    <p>¿Cómo va a cambiar mi diccionario de tamaño, si estoy añadiendo una clave y borrando otra?
+    Tras investigar este código tan simple durante un buen rato (durante el que me sentí idiota, ya que el código era simple), me di cuenta. El fallo era que la variable <code>keys</code> estaba cambiando durante la ejecución del bucle. ¿Por qué? Pues porque <code>keys = dictionary.keys()</code> crea una <strong>referencia</strong> a las claves del diccionario. Por lo tanto, al añadir una nueva clave a nuestro diccionario, aunque borremos la antigua, la variable <code>keys</code> tiene un nuevo valor. De esta forma entraríamos en bucle infinito dentro del bucle for.
+    ¿Cómo solucioné esto? Creando una copia del valor de las claves mediante el uso de listas por comprensión:</p>
+    <pre><code class="language-python">import random
+
+    dictionary = {
+        0:&quot;a&quot;,
+        1:&quot;b&quot;,
+        2:&quot;c&quot;
+    }
+
+    keys = [i for i in dictionary.keys()]
+
+    for key in keys:
+        new_key = random.randint(3,10)
+        dictionary[new_key] = dictionary[key]
+        del dictionary[key]
+    </code></pre>
+    <p>De esta forma, la variable <code>keys</code> contendrá una copia de los valores de <code>dictionary.keys()</code> en vez de una referencia.</p>
+
+
+    <br/>
+    <p>&copy; 2023 Emilio Barragán Rodríguez. Todos los derechos reservados.</p>
+    </body>
+</html>

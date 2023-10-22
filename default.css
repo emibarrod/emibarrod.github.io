@@ -37,6 +37,8 @@ a.h1-link:active {
     text-decoration: none;
 }
 
+/* INDEX LIST LINKS */
+
 a.list-link:link {
 	color:black;
  	text-decoration: none;
