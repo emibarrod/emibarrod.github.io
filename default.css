@@ -5,10 +5,15 @@ body {
 	margin-right: 10vw;
 	font-size: large;
 }
+
 code {
 	background-color: #f4f4f4;
 	color: #333;
 	font-family: Monaco, monospace;
+}
+
+h1,h2,h3,h4 {
+	text-align: left;
 }
 
 pre code {
