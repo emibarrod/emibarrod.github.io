@@ -65,3 +65,26 @@ a.list-link:active {
 	color:black;
     text-decoration: none;
 }
+
+/* NORMAL LINKS */
+
+a.link {
+	color: #333;
+	font-style: italic;
+}
+a.link:link {
+	color:#333;
+ 	text-decoration: none;
+}
+a.link:visited {
+	color:#333;
+    text-decoration: none;
+}
+a.link:hover {
+	color:grey;
+    text-decoration: underline;
+}
+a.link:active {
+	color:#333;
+    text-decoration: none;
+}
