@@ -6,6 +6,11 @@ body {
 	font-size: large;
 }
 
+img {
+	width: 100%; /* takes the 100 % width of its container (.box div)*/
+	height: 100%; /* takes the 100 % height of its container (.box div)*/
+  }
+
 code {
 	background-color: #f4f4f4;
 	color: #333;
@@ -26,6 +31,13 @@ pre code {
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	overflow-x: auto;
+}
+
+blockquote {
+	background: #f4f4f4;
+	border-left: 10px solid #ddd;
+	margin: 1.5em 10px;
+  	padding: 0.5em 10px;
 }
 
 /* H1 LINKS */
