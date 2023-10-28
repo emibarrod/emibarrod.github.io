@@ -1,4 +1,4 @@
-# Cómo crear un bot automatizado de Twitter con GPT
+# Cómo crear un bot automatizado de Twitter con GPT, Python y GCP
 
 Te voy a contar cómo hice un bot automatizado de Twitter que crea sus propios tweets usando la API de OpenAI.
 
@@ -36,6 +36,42 @@ Para hacerte una cuenta de Twitter Developer y tener acceso a las API de Twitter
 
 ### OpenAI API
 
-## Código
+Para crear una cuenta y acceder a la API de OpenAI, sigue los siguientes pasos:
 
-## Google Cloud Platform
+1. **Regístrate en OpenAI**: 
+   Dirígete al sitio web oficial de OpenAI para registrarte: [https://platform.openai.com/signup](https://platform.openai.com/signup).
+
+2. **Consigue la API Key**:
+   Una vez registrado, ve a [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys), busca la opción para crear una nueva clave API (API Key). Esta clave te permitirá hacer llamadas a la API de OpenAI desde tu código.
+
+3. **Configura la facturación** (opcional):
+    La API de OpenAI te ofrece 5$ de créditos gratis a lo largo de 3 meses. Sin embargo, mi recomendación es que actives la facturación para que cuando se acaben los créditos no tengas problemas. Para ello ve a [https://platform.openai.com/account/billing/payment-methods](https://platform.openai.com/account/billing/payment-methods) y configura un método de pago. Los precios de la API son bastante bajos. Puedes ver los precios en [la página de pricing](https://openai.com/pricing#language-models).
+
+    > **IMPORTANTE**: Te aconsejo que actives un límite de facturación mensual. Puedes hacerlo en el apartado de [Usage Limits](https://platform.openai.com/account/billing/limits). Yo lo tengo puesto a 1$, aunque nunca he gastado más de 4 céntimos mensuales.
+
+### Google Cloud Platform
+
+Para este paso, voy a suponer que tienes una cuenta de Google.
+
+1. **Crea un proyecto en GCP**:
+    Ve a Google Cloud ([https://cloud.google.com/](https://cloud.google.com/)) e inicia sesión. Serás dirigido al Console de GCP. En el menú desplegable de la parte superior, crea un nuevo proyecto:
+
+    ![Crea un proyecto](crear_proyecto_gcp.png)
+
+    Cuando lo hayas creado, seleccionalo. Debería aparecerte en el desplegable anterior.
+
+
+2. **Habilitar la facturación**:
+    En el panel de navegación izquierdo de de GCP, busca "Facturación". Haz clic en "Vincular una cuenta de facturación" y selecciona la cuenta de facturación que quieras. Si no tienes una, haz clic en "Crear cuenta de facturación" y sigue los pasos. Puede ser que te den una prueba gratis. Acéptala, es gratis.
+
+    ![Facturación GCP](facturacion_gcp.png)
+
+    ![Crear cuenta facturación](crear_cuenta_facturacion.png)
+
+## Desarrollo
+
+### Código
+
+### Implementación en GCP
+
+### Ejecución automática
