@@ -44,7 +44,7 @@ Para crear una cuenta y acceder a la API de OpenAI, sigue los siguientes pasos:
    Dirígete al sitio web oficial de OpenAI para registrarte: [https://platform.openai.com/signup](https://platform.openai.com/signup).
 
 2. **Consigue la API Key**:
-   Una vez registrado, ve a [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys), busca la opción para crear una nueva clave API (API Key). Esta clave te permitirá hacer llamadas a la API de OpenAI desde tu código.
+   Una vez registrado, ve a [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys) y busca la opción para crear una nueva clave API (API Key). Esta clave te permitirá hacer llamadas a la API de OpenAI desde tu código.
 
 3. **Configura la facturación** (opcional):
     La API de OpenAI te ofrece 5$ de créditos gratis a lo largo de 3 meses. Sin embargo, mi recomendación es que actives la facturación para que cuando se acaben los créditos no tengas problemas. Para ello ve a [https://platform.openai.com/account/billing/payment-methods](https://platform.openai.com/account/billing/payment-methods) y configura un método de pago. Los precios de la API son bastante bajos. Puedes ver los precios en [la página de pricing](https://openai.com/pricing#language-models).
@@ -87,12 +87,13 @@ Antes de nada, hay que asegurarse de que tenemos instaladas las dos librerías q
 
 Tras instalar estas dos librerías, estamos listos para empezar a programar.
 
-- **tweet_generation.py**: Este archivo contendrá todo lo necesario para generar el texto que contendrá nuestro tweet.
+#### tweet_generation.py
+
+Este archivo contendrá todo lo necesario para generar el texto que contendrá nuestro tweet.
 
 Primero tenemos que importar las librerías necesarias:
 
 ```python
-import os
 import random
 import openai
 ```
@@ -107,8 +108,8 @@ Esta parte es interesante. Tienes que definir qué quieres que escriba tu bot au
 
 ```python
 PROMPTS = {
-    0: """Escribe un chiste corto.""",
-    1: """Escribe una adivinanza corta."""
+    0: "Escribe un chiste corto.",
+    1: "Escribe una adivinanza corta."
 }
 ```
 
@@ -125,12 +126,12 @@ PROMPT_CHOICE = random.randrange(N_PROMPTS)
 # El número máximo de tokens que queremos en la respuesta
 MAX_TOKENS = 80
 # El nivel de "divagación" que le permitimos al modelo.
-# En este caso, 1 es el máximo y 0 el mínimo.
+# En este caso 1 es el máximo y 0 el mínimo.
 TEMPERATURE = 1
 ```
 > **CONSEJO**: Para probar y entender los prompts y variables que usarás, te recomiendo usar el [Playground de OpenAI](https://platform.openai.com/playground).
 
-Para que el modelo de lenguaje entienda el prompt, hay que mandárselo de una forma en concreto. Puedes ver algunos ejemplos en la [documentación de OpenAI](https://platform.openai.com/docs/guides/gpt/chat-completions-api). En resumen, tenemos que pasarle una lista de mensajes en formato diccionario. En cada mensaje tenemos que definirle quién escribe el mensaje (role) y el contenido del mensaje (content). En nuestro ejemplo, el contenido va a ser una de los prompts que hemos definido antes:
+Para que el modelo de lenguaje entienda el prompt, hay que mandárselo de una forma en concreto. Puedes ver algunos ejemplos en la [documentación de OpenAI](https://platform.openai.com/docs/guides/gpt/chat-completions-api). En resumen, tenemos que pasarle una lista de mensajes en forma de diccionarios. En cada mensaje tenemos que definirle quién escribe el mensaje (role) y el contenido del mensaje (content). En nuestro ejemplo, el contenido va a ser una de los prompts que hemos definido antes:
 
 ```python
 MESSAGES = [{"role": "user", "content": PROMPTS[PROMPT_CHOICE]}]
@@ -158,7 +159,7 @@ def get_openai_response(model=MODEL,
         print(response)
 ```
 
-Una vez tengamos la función con la que obtenemos la respuesta, tenemos que usar esa respuesta para generar un tweet. Es importante tener en cuenta que un tweet no puede sobrepasar los 280 caracteres (a no ser que pagues...), por lo que también lo tendremos en cuenta en la función que generará un tweet:
+Una vez tengamos la función con la que obtenemos la respuesta, tenemos que usar esa respuesta para generar un tweet. Es importante saber que un tweet no puede sobrepasar los 280 caracteres (a no ser que pagues...), por lo que también lo tendremos en cuenta en la función que generará el tweet:
 
 ```python
 def generate_tweet(model=MODEL,
@@ -184,15 +185,14 @@ def generate_tweet(model=MODEL,
 Nuestro archivo `tweet_generation.py` al completo sería el siguiente:
 
 ```python
-import os
 import random
 import openai
 
 openai.api_key = "aquí va tu api key"
 
 PROMPTS = {
-    0: """Escribe un chiste corto.""",
-    1: """Escribe una adivinanza corta."""
+    0: "Escribe un chiste corto.",
+    1: "Escribe una adivinanza corta."
 }
 
 MODEL = "gpt-3.5-turbo"
@@ -236,11 +236,53 @@ def generate_tweet(model=MODEL,
     return generated_text_clean
 ```
 
-- **tweet_send.py**
+#### tweet_send.py
+
+Este archivo contendrá la función necesaria para subir nuestro tweet generado a twitter.
+
+Primero importamos [tweepy](https://www.tweepy.org/), que es la librería que nos permitirá usar la API de twitter más cómodamente:
 
 ```python
-"Module to publish tweets"
+import tweepy
+```
 
+En segundo lugar, definimos las variables correspondientes a todas las API Keys que hemos generado al principio en nuestra Twitter Developer Account:
+
+```python
+CONSUMER_KEY = "tu api key de twitter aquí"
+CONSUMER_SECRET = "tu api key secret de twitter aquí"
+ACCESS_TOKEN = "tu access token de twitter aquí"
+ACCESS_TOKEN_SECRET = "tu access token secret de twitter aquí"
+```
+
+Por último, creamos la función que enviará el tweet:
+
+```python
+def send_tweet(generated_text_clean,
+               consumer_key=CONSUMER_KEY,
+               consumer_secret=CONSUMER_SECRET,
+               access_token=ACCESS_TOKEN,
+               access_token_secret=ACCESS_TOKEN_SECRET
+               ):
+    "Sends tweet"
+    # Creamos una sesión conectada a la API
+    client = tweepy.Client(
+        consumer_key=consumer_key, consumer_secret=consumer_secret,
+        access_token=access_token, access_token_secret=access_token_secret
+    )
+
+
+    try:
+        # Enviamos el tweet
+        client.create_tweet(text=generated_text_clean)
+    except Exception as e:
+        print("Error al mandar el tweet:")
+        print(e)
+```
+
+Nuestro archivo `tweet_send.py` al completo sería el siguiente:
+
+```python
 import os
 import tweepy
 
@@ -248,8 +290,6 @@ CONSUMER_KEY = os.environ['CONSUMER_KEY']
 CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
-
-# Twitter execution
 
 def send_tweet(generated_text_clean,
                consumer_key=CONSUMER_KEY,
@@ -263,7 +303,6 @@ def send_tweet(generated_text_clean,
         access_token=access_token, access_token_secret=access_token_secret
     )
 
-
     try:
         client.create_tweet(text=generated_text_clean)
     except Exception as e:
@@ -271,11 +310,12 @@ def send_tweet(generated_text_clean,
         print(e)
 ```
 
-- **main.py**
+#### main.py
+
+Este archivo unificará la ejecución de los dos anteriores. La idea es generar el tweet y luego enviarlo.
 
 ```python
-"""main module"""
-
+# Importamos las funciones que hemos creado
 from tweet_generation import generate_tweet
 from tweet_sending import send_tweet
 
@@ -286,6 +326,73 @@ def job(event, context):
     print(tweet_text)
 ```
 
+La función `job(event, context)` es la que se ejecutará en GCP más adelante, así que la explicaremos en el siguiente apartado. Si queréis ejecutar en local primero para hacer pruebas, usad el siguiente código:
+
+```python
+from tweet_generation import generate_tweet
+from tweet_sending import send_tweet
+
+def main():
+    tweet_text = generate_tweet()
+    send_tweet(tweet_text)
+    print(tweet_text)
+
+if __name__=="__main__":
+    main()
+```
+
+#### Posible mejoras del código
+
+- **Seguridad**
+
+Para hacer el código más seguro, podríamos almacenar las API Keys en variables de entorno. Si usáramos variables de entorno para las variables del archivo `tweet_sending.py`, tendríamos que importar la librería `os` y poner nuestras variables de la siguiente forma:
+
+```python
+import os
+
+CONSUMER_KEY = os.environ['CONSUMER_KEY']
+CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
+```
+
+Esto lo implementaremos en GCP puesto que es mucho más seguro que dejar las API Keys en el propio código.
+
+- **Gestión de errores**
+
+Se podría usar alguna librería python de logging. En este tutorial he querido mantenerlo simple y solo usar prints, puesto que los prints luego se verán reflejados en los logs de GCP.
+
+Por otra parte, se podría mejorar el código de generación de tweet, teniendo en cuenta posibles errores de la API y reintentarlo si falla. Lo mismo a la hora de enviar el tweet.
+
+¿Se te ocurre alguna mejora más? Mándame tu sugerencia por LinkedIn: [linkedin.com/in/emibarrod](https://www.linkedin.com/in/emibarrod/)
+
 ### Implementación en GCP
+
+Una vez tengamos todo el código listo, es hora de subirlo a GCP. Para ello, usaremos un servicio llamado *Cloud Functions*.
+
+Antes de nada, debemos crear un tema y un cron scheduler.
+
+![Cloud Functions](cloud_functions.png)
+
+En la imagen, a mí me aparece en el apartado de "Fijados". A tí probablemente te aparecerá en el apartado de "Más productos".
+
+Una vez dentro, creamos una función. Probablemente tengas que habilitar algunos servicios extra. No te preocupes, puedes habilitarlos sin problema.
+
+![Crear función](crear_funcion.png)
+
+Cuando acabe de habilitarse todo, entraremos en el formulario de creación de la función. Aquí es donde configuraremos la función.
+
+En primer lugar, ponle el nombre que quieras a tu función en el campo `Nombre de la función`. En `Región`, escoge la región más cercana a donde tú vives, en mi caso la región más cercana es `europe-southwest1`. La autenticación la dejamos en obligatoria.
+
+![Pasos para configurar la función](configurar_funcion_1.png)
+
+Una vez configurado lo anterior, le damos a la opción de "agregar activador" y seleccionamos "Activador de Pub/Sub".
+
+![Activador](activador.png)
+
+Una vez lo selecciones, probablemente tendrás que habilitar más servicios. Habilítalos y estarás en la pantalla de configuración. Cuando estés ahí, dale al apartado de seleccionar un tema de Cloud Pub/Sub.
+
+![Configuración del activador](configurar_activador.png)
+
 
 ### Ejecución automática
