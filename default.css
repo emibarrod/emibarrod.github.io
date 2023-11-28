@@ -25,10 +25,6 @@ code {
 	font-family: Monaco, monospace;
 }
 
-h1 {
-	border-bottom: 1px solid #969696;
-}
-
 h1,h2,h3,h4 {
 	text-align: left;
 }
@@ -54,6 +50,7 @@ blockquote {
 
 .header {
     grid-area: header;
+	border-bottom: 1px solid #969696;
 }
 .content {
     grid-area: content;
