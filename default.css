@@ -1,22 +1,9 @@
 body {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 10vh 8fr 10vh;
-    grid-template-areas:
-        'header'
-        'content'
-        'footer';
-    text-align: justify;
-    font-family: Arial, sans-serif;
-    font-size: large;
-}
-
-img {
-	width: 100%; /* takes the 100 % width of its container (.box div)*/
-	height: 100%; /* takes the 100 % height of its container (.box div)*/
+	text-align: justify;
+	font-family: Arial, sans-serif;
+	margin-left: 10vw;
+	margin-right: 10vw;
+	font-size: large;
 }
 
 code {
@@ -39,24 +26,6 @@ pre code {
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	overflow-x: auto;
-}
-
-blockquote {
-	background: #f4f4f4;
-	border-left: 10px solid #ddd;
-	margin: 1.5em 10px;
-  	padding: 0.5em 10px;
-}
-
-.header {
-    grid-area: header;
-	border-bottom: 1px solid #969696;
-}
-.content {
-    grid-area: content;
-}
-.footer {
-    grid-area: footer;
 }
 
 /* H1 LINKS */
