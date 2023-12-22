@@ -4,13 +4,13 @@ body {
 	margin-left: 10vw;
 	margin-right: 10vw;
 	font-size: large;
-	background-color: #2c2c2c;
-	color: #e4e4e4;
+	background-color: #ffffff;
+	color: #000000;
 }
 
 code {
-	background-color: #1d1d1d;
-	color: #CCCCCC;
+	background-color: #e6e6e6;
+	color: #000000;
 	font-family: Monaco, monospace;
 }
 
@@ -25,11 +25,11 @@ li, ul, p {
 pre code {
 	display: block;
 	padding: 1em;
-	background-color: #000;
+	background-color: #3a3a3a;
 	color: white;
 	font-size: medium;
 	font-family: Monaco, monospace;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #000000;
 	border-radius: 5px;
 	overflow-x: auto;
 }
@@ -37,11 +37,11 @@ pre code {
 /* H1 LINKS */
 
 a.h1-link:link {
-	color:white;
+	color:black;
  	text-decoration: none;
 }
 a.h1-link:visited {
-	color:white;
+	color:black;
     text-decoration: none;
 }
 a.h1-link:hover {
@@ -49,25 +49,25 @@ a.h1-link:hover {
     text-decoration: underline;
 }
 a.h1-link:active {
-	color:white;
+	color:black;
     text-decoration: none;
 }
 
 /* NORMAL LINKS */
 
 a:link {
-	color: #979797;
+	color: grey;
  	text-decoration: none;
 }
 a:visited {
-	color:#979797;
+	color:grey;
     text-decoration: none;
 }
 a:hover {
-	color:#CCCCCC;
+	color:grey;
     text-decoration: underline;
 }
 a:active {
-	color:#979797;
+	color:grey;
     text-decoration: none;
 }
