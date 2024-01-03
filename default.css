@@ -34,6 +34,31 @@ pre code {
 	overflow-x: auto;
 }
 
+form {
+	margin-left: 5px;
+}
+
+input {
+	font-size:large;
+	margin-bottom: 10px;
+}
+
+button {
+	font-family: Arial, sans-serif;
+	font-size:large;
+	color: black;
+	background-color: white;
+	border-style: solid;
+	border-color: black;
+}
+
+button:hover {
+	color: white;
+	background-color: black;
+	border-style: solid;
+	border-color: black;
+}
+
 /* H1 LINKS */
 
 a.h1-link:link {
