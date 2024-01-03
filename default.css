@@ -1,8 +1,8 @@
 body {
 	text-align: justify;
 	font-family: Arial, sans-serif;
-	margin-left: 10vw;
-	margin-right: 10vw;
+	margin-left: 30vw;
+	margin-right: 30vw;
 	font-size: large;
 	background-color: #ffffff;
 	color: #000000;
@@ -71,3 +71,15 @@ a:active {
 	color:grey;
     text-decoration: none;
 }
+
+@media only screen and (max-width: 767px) {
+	body {
+	  text-align: justify;
+	  font-family: Arial, sans-serif;
+	  margin-left: 5vw;
+	  margin-right: 5vw;
+	  font-size: large;
+	  background-color: #ffffff;
+	  color: #000000;
+	}
+  }
