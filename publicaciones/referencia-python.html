@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="image/x-icon" href="/favicon.ico" rel="icon" >
     <link type="text/css" href="/default.css" rel="stylesheet">
+    <link type="text/css" href="/navbar.css" rel="stylesheet">
     <script data-goatcounter="https://emibarrod.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
     <meta name="description"
@@ -13,8 +14,45 @@
 </head>
 
 <body>
-    <h1><a class="h1-link" href='https://emibarrod.com/publicaciones'>&larr;</a> Cuidado con las referencias en Python</h1>
-    <hr>
+    <h1>Cuidado con las referencias en Python</h1>
+    <hr/>
+
+    <nav>
+        <!-- Botón de toggle para dispositivos móviles -->
+        <button id="toggle-btn">&equiv;</button>
+
+        <ul>
+            <li><a href="https://emibarrod.com">Inicio</a></li>
+            <p>&bull;</p>
+            <li><a href="https://emibarrod.com/publicaciones.html">Publicaciones</a></li>
+            <p>&bull;</p>
+            <li><a href="#">Sobre mí</a>
+                <ul>
+                    <li><a href="https://emibarrod.com/curriculum.html">Currículum</a></li>
+                    <li><a href="https://emibarrod.com/proyectos.html">Proyectos</a></li>
+                    <li><a href="https://emibarrod.com/contacto.html">Contacto</a></li>
+                </ul>
+            </li>
+            <p>&bull;</p>
+            <li><a href="#">Servicios</a>
+                <ul>
+                    <li><a href="https://topmate.io/emibarrod">Mentorías</a></li>
+                <!--<li><a href="#">Consultoría</a></li>-->
+                </ul>
+            </li>
+            <p>&bull;</p>
+            <li><a href="https://emibarrod.com/newsletter/index.html">Newsletter</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        // Función para mostrar/ocultar la navbar en dispositivos móviles
+        document.getElementById('toggle-btn').addEventListener('click', function () {
+            var nav = document.querySelector('nav ul');
+            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        });
+    </script>
+
     <p>El otro día estaba intentando actualizar el valor de las claves de un diccionario en Python de manera iterativa. Digamos que mi código era el siguiente.</p>
     <pre><code class="language-python">import random
 

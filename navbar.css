@@ -1,0 +1,109 @@
+nav {
+    background-color: transparent; /* Fondo transparente para el navbar */
+    padding: 15px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav li {
+    display: inline-block;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+}
+
+nav ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff; /* Fondo blanco para el menú desplegable */
+    border: 1px solid #000; /* Bordes negros */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra difuminada */
+}
+
+nav ul p {
+    display: inline;
+}
+
+nav li:hover > ul {
+    display: inherit;
+}
+
+nav ul ul li {
+    width: 200px;
+    float: none;
+    display: list-item;
+    position: relative;
+}
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 600px) {
+    nav ul {
+        display: none;
+        text-align: left;
+    }
+
+    nav li {
+        display: block;
+        margin: 0;
+    }
+
+    nav a {
+        padding: 15px;
+        display: block;
+    }
+
+    nav ul ul {
+        top: initial;
+        left: initial;
+        position: static;
+        display: none;
+    }
+
+    nav ul ul li {
+        display: block;
+    }
+
+    nav ul ul ul li {
+        top: initial;
+        left: initial;
+        position: static;
+    }
+
+    #toggle-btn {
+        display: block;
+        border-style: solid;
+        border-radius: 25%;
+        border-color: #8b8b8b;
+        color: #8b8b8b;
+        font-size: xx-large;
+        background-color: #e6e6e6;
+    }
+
+    nav ul p {
+        display: none;
+    }
+}
+
+/* Estilos para ordenadores */
+@media only screen and (min-width: 601px) {
+    #toggle-btn {
+        display: none; /* Ocultar el botón en dispositivos más grandes */
+    }
+}

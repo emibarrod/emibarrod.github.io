@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="image/x-icon" href="/favicon.ico" rel="icon" >
-    <link type="text/css" href="default.css" rel="stylesheet">
+    <link type="text/css" href="/default.css" rel="stylesheet">
+    <link type="text/css" href="/navbar.css" rel="stylesheet">
     <link rel="canonical" href="https://emibarrod.com">
     <script data-goatcounter="https://emibarrod.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
@@ -15,25 +16,57 @@
 
 <body>
     <h1>Emilio Barragán Rodríguez</h1>
+
     <hr/>
 
-    <p>¡¡Suscríbete a mi newsletter sobre ingeniería de datos!!</p>
-    <ul>
-        <li><a class="link" href="https://emibarrod.com/newsletter/index.html">Newsletter de Ingeniería de Datos</a></p></li>
-    </ul>
-    <br/>
+    <nav>
+        <!-- Botón de toggle para dispositivos móviles -->
+        <button id="toggle-btn">&equiv;</button>
 
-    <p>También ofrezco <a class="link" href="https://topmate.io/emibarrod">servicios de mentoría</a>. Por si quieres empezar tu
-        carrera en el mundo del dato.
+        <ul>
+            <li><a href="https://emibarrod.com">Inicio</a></li>
+            <p>&bull;</p>
+            <li><a href="https://emibarrod.com/publicaciones.html">Publicaciones</a></li>
+            <p>&bull;</p>
+            <li><a href="#">Sobre mí</a>
+                <ul>
+                    <li><a href="https://emibarrod.com/curriculum.html">Currículum</a></li>
+                    <li><a href="https://emibarrod.com/proyectos.html">Proyectos</a></li>
+                    <li><a href="https://emibarrod.com/contacto.html">Contacto</a></li>
+                </ul>
+            </li>
+            <p>&bull;</p>
+            <li><a href="#">Servicios</a>
+                <ul>
+                    <li><a href="https://topmate.io/emibarrod">Mentorías</a></li>
+                <!--<li><a href="#">Consultoría</a></li>-->
+                </ul>
+            </li>
+            <p>&bull;</p>
+            <li><a href="https://emibarrod.com/newsletter/index.html">Newsletter</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        // Función para mostrar/ocultar la navbar en dispositivos móviles
+        document.getElementById('toggle-btn').addEventListener('click', function () {
+            var nav = document.querySelector('nav ul');
+            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        });
+    </script>
+
+    <p>¡Hola! Soy Emilio, un apasionado ingeniero de datos con más de 2 años de experiencia.
+        He creado esta página para compartir las cosas que voy aprendiendo. En esta página trato
+        tanto temas relacionados con la ingeniería de datos como temas sobre carrera profesional.</p>
+
+    <p>Creo contenido en <a href="linkedin.com/in/emibarrod">mi Linkedin</a>, mayoritariamente relacionados
+    con los mismos temas que puedes encontrar en esta página. Así que si te gusta lo que lees, no dudes en seguirme.
     </p>
 
-    <p>Más cosas que puedes ver en esta página:</p>
-    <ul>
-        <li><a class="link" href="https://emibarrod.com/publicaciones.html">Publicaciones</a></li>
-        <li><a class="link" href="https://emibarrod.com/proyectos.html">Proyectos</a></li>
-        <li><a class="link" href="https://emibarrod.com/curriculum.html">Currículum</a></li>
-        <li><a class="link" href="https://emibarrod.com/contacto.html">Contacto</a></li>
-    </ul>
+    <p>Ofrezco servicios de mentoría para gente que quiera empezar en el mundo
+        de los datos, revisión de currículum, etc. También ofrezco servicios de consultoría,
+        por si necesitas que realice algún trabajo de ingeniería de datos.
+    </p>
 
     <br/>
     <p>&copy; 2023 Emilio Barragán Rodríguez. Todos los derechos reservados.</p>

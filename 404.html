@@ -17,8 +17,43 @@ permalink: /404.html
 </head>
 
 <body>
-    <h1><a class="h1-link" href='https://emibarrod.com'>&larr;</a>  Emilio Barragán Rodríguez</h1>
+    <h1>Emilio Barragán Rodríguez</h1>
     <hr/>
+    <nav>
+        <!-- Botón de toggle para dispositivos móviles -->
+        <button id="toggle-btn">&equiv;</button>
+
+        <ul>
+            <li><a href="https://emibarrod.com">Inicio</a></li>
+            <p>&bull;</p>
+            <li><a href="https://emibarrod.com/publicaciones.html">Publicaciones</a></li>
+            <p>&bull;</p>
+            <li><a href="#">Sobre mí</a>
+                <ul>
+                    <li><a href="https://emibarrod.com/curriculum.html">Currículum</a></li>
+                    <li><a href="https://emibarrod.com/proyectos.html">Proyectos</a></li>
+                    <li><a href="https://emibarrod.com/contacto.html">Contacto</a></li>
+                </ul>
+            </li>
+            <p>&bull;</p>
+            <li><a href="#">Servicios</a>
+                <ul>
+                    <li><a href="https://topmate.io/emibarrod">Mentorías</a></li>
+                <!--<li><a href="#">Consultoría</a></li>-->
+                </ul>
+            </li>
+            <p>&bull;</p>
+            <li><a href="https://emibarrod.com/newsletter/index.html">Newsletter</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        // Función para mostrar/ocultar la navbar en dispositivos móviles
+        document.getElementById('toggle-btn').addEventListener('click', function () {
+            var nav = document.querySelector('nav ul');
+            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        });
+    </script>
 
     <p>No sé qué página has buscado, pero no existe :(</p>
     <p>Prueba alguna de estas:</p>
