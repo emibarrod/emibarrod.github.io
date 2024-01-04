@@ -10,7 +10,7 @@
         async src="//gc.zgo.at/count.js"></script>
     <meta name="description"
       content="Archivo de la newsletter de ingeniería de datos de Emilio Barragán Rodríguez.">
-    <title>emibarrod|Newsletter|Archivo</title>
+    <title>Newsletter de Ingeniería de Datos | Archivo | emibarrod</title>
 </head>
 
 <body>
@@ -62,6 +62,11 @@
     </ul>
 
     <br/>
-    <p>&copy; 2023 Emilio Barragán Rodríguez. Todos los derechos reservados.</p>
+    <footer>
+        &copy;<span id="anyo"></span> Emilio Barragán Rodríguez. Todos los derechos reservados.
+        <script>
+            document.getElementById("anyo").innerHTML = new Date().getFullYear();
+        </script>
+    </footer>
 </body>
 </html>

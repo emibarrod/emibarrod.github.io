@@ -9,8 +9,8 @@
     <script data-goatcounter="https://emibarrod.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
     <meta name="description"
-      content="Publicaciones de Emilio Barragán Rodríguez.">
-    <title>emibarrod|Publicaciones</title>
+      content="Publicaciones sobre ingeniería de datos y carrera profesional de Emilio Barragán Rodríguez.">
+    <title>Publicaciones | emibarrod</title>
 </head>
 
 <body>
@@ -62,6 +62,11 @@
     </ul>
 
     <br/>
-    <p>&copy; 2023 Emilio Barragán Rodríguez. Todos los derechos reservados.</p>
+    <footer>
+        &copy; <span id="anyo"></span> Emilio Barragán Rodríguez. Todos los derechos reservados.
+        <script>
+            document.getElementById("anyo").innerHTML = new Date().getFullYear();
+        </script>
+    </footer>
 </body>
 </html>

@@ -10,7 +10,7 @@
         async src="//gc.zgo.at/count.js"></script>
     <meta name="description"
       content="Contacto de Emilio Barragán Rodríguez.">
-    <title>emibarrod|Contacto</title>
+    <title>Contacto | emibarrod</title>
 </head>
 
 <body>
@@ -59,6 +59,11 @@
     </ul>
 
     <br/>
-    <p>&copy; 2023 Emilio Barragán Rodríguez. Todos los derechos reservados.</p>
+    <footer>
+        &copy; <span id="anyo"></span> Emilio Barragán Rodríguez. Todos los derechos reservados.
+        <script>
+            document.getElementById("anyo").innerHTML = new Date().getFullYear();
+        </script>
+    </footer>
     </body>
 </html>

@@ -10,7 +10,10 @@
         async src="//gc.zgo.at/count.js"></script>
     <meta name="description"
       content="Artículo sobre cómo usar las referencias o las copias en Python.">
-    <title>emibarrod|Referencia Python</title>
+      <meta name="keywords"
+      content="referencias python, referencias, python, referencias en python,
+                copias en python">
+    <title>Referencias en Python | emibarrod</title>
 </head>
 
 <body>
@@ -96,6 +99,11 @@
 
 
     <br/>
-    <p>&copy; 2023 Emilio Barragán Rodríguez. Todos los derechos reservados.</p>
+    <footer>
+        &copy; <span id="anyo"></span> Emilio Barragán Rodríguez. Todos los derechos reservados.
+        <script>
+            document.getElementById("anyo").innerHTML = new Date().getFullYear();
+        </script>
+    </footer>
     </body>
 </html>

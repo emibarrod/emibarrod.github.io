@@ -10,7 +10,7 @@
         async src="//gc.zgo.at/count.js"></script>
     <meta name="description"
       content="Newsletter de Ingeniería de Datos. Por Emilio Barragán Rodríguez">
-    <title>emibarrod|Newsletter</title>
+    <title>Newsletter de Ingeniería de Datos | emibarrod</title>
 </head>
 
 <body>
@@ -59,6 +59,11 @@
         <a class="link" href="https://emibarrod.com/publicaciones.html">pulsa aquí</a>.</p>
 
     <br/>
-    <p>&copy; 2023 Emilio Barragán Rodríguez. Todos los derechos reservados.</p>
+    <footer>
+        &copy; <span id="anyo"></span> Emilio Barragán Rodríguez. Todos los derechos reservados.
+        <script>
+            document.getElementById("anyo").innerHTML = new Date().getFullYear();
+        </script>
+    </footer>
     </body>
 </html>

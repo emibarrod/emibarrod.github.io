@@ -10,7 +10,11 @@
         async src="//gc.zgo.at/count.js"></script>
     <meta name="description"
       content="Newsletter de Ingeniería de Datos. Por Emilio Barragán Rodríguez">
-    <title>emibarrod|Newsletter</title>
+    <meta name="keywords"
+      content="ingeniería de datos, newsletter de ingeniería de datos, Emilio, newsletter,
+                ingenieria de datos, newsletter de ingenieria de datos, data engineering newsletter,
+                ingenieria, ingeniería, datos, data, engineering">
+    <title>Newsletter de Ingeniería de Datos | emibarrod</title>
 </head>
 
 <body>
@@ -55,9 +59,9 @@
 
     <p>En esta newsletter, llamada "Newsletter de Ingeniería de Datos" (nombre bastante original), tendrás:</p>
     <ul>
+        <!--<li>Novedades en el campo de la ingeniería de datos (tecnologías, eventos, etc).</li>-->
+        <li>Casos reales: te voy a contar lo que me encuentro en proyectos reales de ingeniería de datos.</li>
         <li>Consejos de carrera profesional en el mundo del dato.</li>
-        <li>Novedades en el campo de la ingeniería de datos (tecnologías, eventos, etc).</li>
-        <li>Casos reales: te voy a contar lo que me encuentro en proyectos reales.</li>
         <li>Tutoriales cortos.</li>
         <li>Y muchas cosas más...</li>
     </ul>
@@ -79,6 +83,11 @@
     </ul>
 
     <br/>
-    <p>&copy; 2023 Emilio Barragán Rodríguez. Todos los derechos reservados.</p>
+    <footer>
+        &copy; <span id="anyo"></span> Emilio Barragán Rodríguez. Todos los derechos reservados.
+        <script>
+            document.getElementById("anyo").innerHTML = new Date().getFullYear();
+        </script>
+    </footer>
     </body>
 </html>
