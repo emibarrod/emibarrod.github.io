@@ -1,5 +1,5 @@
 body {
-	text-align: justify;
+	text-align: left;
 	font-family: Arial, sans-serif;
 	margin-left: 25vw;
 	margin-right: 25vw;
@@ -99,7 +99,7 @@ a:active {
 
 @media only screen and (max-width: 767px) {
 	body {
-	  text-align: justify;
+	  text-align: left;
 	  font-family: Arial, sans-serif;
 	  margin-left: 5vw;
 	  margin-right: 5vw;
