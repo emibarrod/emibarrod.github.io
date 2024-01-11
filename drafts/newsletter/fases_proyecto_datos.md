@@ -1,3 +1,7 @@
+## Las fases en una imagen
+
+<img src="https://emibarrod.com/newsletter/archivo/images/fases-proyecto-datos.png">
+
 ## 1. Definición de requisitos
 
 Consiste en recabar información (normalmente en una reunión con el cliente) de todo lo que se quiere conseguir con el proyecto. También tendremos que definir cómo queremos conseguir el objetivo (por ejemplo si el cliente quiere usar una tecnología en concreto). Por último, es importante definir una métrica para que, al finalizar el proyecto, se tenga claro si ha sido exitoso o si hemos fracasado.
@@ -18,7 +22,7 @@ En esta fase, se diseña la arquitectura de datos que soportará los requisitos 
 Puntos que creo que son clave:
     
 - ¿On-premise o Cloud?
-- Tecnologías a usar: Base de datos, ETL, orquestación, governanza, etc. Definir las tecnologías que usará nuestra arquitectura.
+- Tecnologías a usar: Base de datos, ETL, orquestación, gobernanza, etc. Definir las tecnologías que usará nuestra arquitectura.
 - Definición del modelo de datos.
 - Definición del proceso de gobernanza de datos.
 
