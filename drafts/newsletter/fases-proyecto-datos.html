@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/x-icon" href="/favicon.ico" rel="icon" >
+    <link type="text/css" href="/default.css" rel="stylesheet">
+    <link type="text/css" href="/navbar.css" rel="stylesheet">
+    <script data-goatcounter="https://emibarrod.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+    <meta name="description"
+      content="Artículo sobre cómo usar las referencias o las copias en Python.">
+      <meta name="keywords"
+      content="referencias python, referencias, python, referencias en python,
+                copias en python">
+    <title>Fases de un proyecto de ingeniería de datos | Newsletter de Ingeniería de Datos | emibarrod</title>
+</head>
+
+<body>
+    <h1>Fases de un proyecto de ingeniería de datos</h1>
+    <hr/>
+
+    <nav>
+        <!-- Botón de toggle para dispositivos móviles -->
+        <button id="toggle-btn">&equiv;</button>
+
+        <ul>
+            <li><a href="https://emibarrod.com">Inicio</a></li>
+            <p>&bull;</p>
+            <li><a href="https://emibarrod.com/publicaciones.html">Publicaciones</a></li>
+            <p>&bull;</p>
+            <li><a href="#">Sobre mí</a>
+                <ul>
+                    <li><a href="https://emibarrod.com/curriculum.html">Currículum</a></li>
+                    <li><a href="https://emibarrod.com/proyectos.html">Proyectos</a></li>
+                    <li><a href="https://emibarrod.com/contacto.html">Contacto</a></li>
+                </ul>
+            </li>
+            <p>&bull;</p>
+            <li><a href="#">Servicios</a>
+                <ul>
+                    <li><a href="https://topmate.io/emibarrod">Mentorías</a></li>
+                <!--<li><a href="#">Consultoría</a></li>-->
+                </ul>
+            </li>
+            <p>&bull;</p>
+            <li><a href="https://emibarrod.com/newsletter/index.html">Newsletter</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        // Función para mostrar/ocultar la navbar en dispositivos móviles
+        document.getElementById('toggle-btn').addEventListener('click', function () {
+            var nav = document.querySelector('nav ul');
+            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        });
+    </script>
+
+    <h2>Las fases en una imagen</h2>
+
+    <img width="100%" src="/home/emibarrod/Proyectos/emibarrod.github.io/newsletter/archivo/images/fases-proyecto-datos.png">
+
+    <h2>1. Definición de requisitos</h2>
+
+    <p>Consiste en recabar información (normalmente en una reunión con el cliente) de todo lo que se quiere conseguir con el proyecto. También tendremos que definir cómo queremos conseguir el objetivo (por ejemplo si el cliente quiere usar una tecnología en concreto). Por último, es importante definir una métrica para que, al finalizar el proyecto, se tenga claro si ha sido exitoso o si hemos fracasado.</p>
+    <p>En este primer punto de un proyecto de ingeniería de datos, decidiremos si el proyecto es viable o si tenemos capacidad para realizarlo. Es mejor una retirada a tiempo que luego fracasar estrepitosamente (aunque tampoco hay que acobardarse ante un proyecto desafiante).</p>
+    <p>Resumen de algunos puntos clave en esta etapa:</p>
+    <ul>
+        <li>Definición de las fuentes de datos que se usarán (para que luego no haya sorpresas): volumen de datos, tipo de fuente de datos, nivel de seguridad y permisos, etc.</li>
+        <li>Definición de la frecuencia de actualización. Tanto de las fuentes de datos, como de las ETLs que crearemos.</li>
+        <li>¿Tenemos requisitos de tecnología? Esto es importante puesto que afectará a las fases posteriores.</li>
+    </ul>
+
+    <h2>2. Diseño de la arquitectura de datos</h2>
+
+    <p>En esta fase, se diseña la arquitectura de datos que soportará los requisitos del proyecto. Esto incluye la selección de tecnologías, la definición de modelos de datos, y la planificación de la infraestructura de almacenamiento y procesamiento de datos.</p>
+    <p>Puntos que creo que son clave:</p>
+    <ul>
+        <li>¿On-premise o Cloud?</li>
+        <li>Tecnologías a usar: Base de datos, ETL, orquestación, governanza, etc. Definir las tecnologías que usará nuestra arquitectura.</li>
+        <li>Definición del modelo de datos.</li>
+        <li>Definición del proceso de gobernanza de datos.</li>
+    </ul>
+
+    <h2>3. Planificación y tiempos</h2>
+
+    <p>En esta fase se prepara un plan detallado de las fases de desarrollo que tendrá el proyecto. Así como los tiempos, reparto de tareas, etc. Esta será la etapa en la que se puede decidir si lo que se quiere hacer es viable en el tiempo dado.</p>
+    <p>Hay que tener en cuenta:</p>
+    <ul>
+        <li>Rol de cada colaborador del equipo: responsabilidades, permisos, tareas, etc.</li>
+        <li>Tiempo de cada tarea: lo mejor es hacer un cronograma de algún tipo definiendo las fases.</li>
+        <li>Dependencias de cada tarea: hay que tener claro qué tareas dependen de otras, para asignar prioridades.</li>
+    </ul>
+
+    <h2>4. Implementación y desarrollo</h2>
+
+    <p>Aquí se lleva a cabo el proyecto como tal. Esto incluye la programación, la configuración de bases de datos, la integración de sistemas, y la creación de flujos de procesamiento de datos.</p>
+    <p>Puntos importantes:</p>
+    <ul>
+        <li>Desarrollar según el estándar de la empresa: tu empresa debería tener un estándar de desarrollo. Si es el caso, se debería seguir. Si no, no te preocupes, en siguientes entregas de esta newsletter te enseñaré a definir una.</li>
+        <li>Independientemente del punto anterior, SIEMPRE debemos implementar tests y logs para nuestro desarrollo. Esto nos ayudará en la siguiente etapa del proyecto.</li>
+    </ul>
+
+    <h2>5. Pruebas</h2>
+
+    <p>En esta fase, el proyecto desarrollado se somete a diversas pruebas para asegurar que funciona según lo previsto. Esto incluye pruebas de rendimiento, pruebas de integridad de datos, y pruebas de seguridad.</p>
+    <p>Consideraciones:</p>
+    <ul>
+        <li>Si lo hemos hecho bien hasta este punto, los tests y logs que hemos implementado en la etapa anterior nos ayudarán a probar el proyecto.</li>
+        <li>En esta fase podemos crear algún test o prueba que pudiera faltar.</li>
+        <li>Importante medir los tiempos de ejecución, para más tarde poder detectar comportamientos extraños en el proyecto.</li>
+    </ul>
+
+    <h2>6. Despliegue</h2>
+
+    <p>Una vez hemos probado el proyecto y se ha confirmado que cumple con los requisitos, procedemos al despliegue. Esto puede incluir la migración de datos, la puesta en marcha de ETLs en producción y/o la integración con otros sistemas existentes entre otras tareas.</p>
+    <p>Importante:</p>
+    <ul>
+        <li>Lo he obviado en los puntos anteriores, pero el entorno de desarrollo del proyecto debe ser completamente independiente del entorno de producción.</li>
+        <li>No se debería hacer el cambio al proyecto en producción de forma instantánea. Deberíamos pasar primero por la siguiente fase y ver que todo funciona bien.</li>
+    </ul>
+
+    <h2>7. Operación y mantenimiento</h2>
+
+    <p>Después del despliegue, el sistema entra en la fase de operación, donde se monitorea, se mantiene y se actualiza según sea necesario. Esta fase incluye la gestión de la calidad de los datos, la resolución de problemas y la implementación de mejoras.</p>
+    
+    <h2>8. Evaluación</h2>
+
+    <p>Finalmente, evaluamos el rendimiento del sistema y recopilamos información para identificar áreas de mejora. Esto puede llevar a ajustes en la arquitectura de datos, en el modelo de datos, en la ETL. A veces, de un proyecto se pueden identificar oportunidades para futuros proyectos. Si nuestros logs y tests están bien implementados, esta fase será coser y cantar.</p>
+    
+    <br/>
+
+    <footer>
+        &copy; <span id="anyo"></span> Emilio Barragán Rodríguez. Todos los derechos reservados.
+        <script>
+            document.getElementById("anyo").innerHTML = new Date().getFullYear();
+        </script>
+    </footer>
+    </body>
+</html>
