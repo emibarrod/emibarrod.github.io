@@ -1,0 +1,26 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Ingeniería de datos y más</h1>
+			<p>
+				¡Bienvenido a mi blog personal! Mi nombre es Emilio Barragán y trabajo como ingeniero de datos. Aquí compartiré mi experiencia en el mundo de la ingeniería de datos, con tutoriales y artículos sobre distintas tecnologías y conceptos.
+			</p>
+			<p>
+				Espero que encuentres útil el contenido. Si tienes alguna pregunta o sugerencia, no dudes en contactarme en mis redes sociales.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,3 +1,0 @@
-User-agent: *
-Disallow: /drafts/
-Sitemap: emibarrod.com/sitemap.xml
