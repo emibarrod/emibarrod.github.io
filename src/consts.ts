@@ -8,13 +8,11 @@ export const SITE_DESCRIPTION =
 export const SITE_AUTHOR = 'Emilio Barragán Rodríguez';
 export const SITE_URL = 'https://emibarrod.com';
 
-// One-line positioning statement, derived from the CV. Used on the homepage.
-export const TAGLINE =
-	'Data engineer. I build production data pipelines that hold up.';
-
-// Short "what I'm doing now" line. Update when the role changes.
-export const CURRENTLY =
-	'Currently a Mid Data Engineer at Adsmurai, working with dbt and external APIs to centralise marketing, SEO and social listening data.';
+// The homepage headline is the name itself (SITE_TITLE), so this is the
+// supporting line that carries the role and the detail. Update when the role
+// changes — it names the current employer.
+export const INTRO =
+	'Data engineer at Adsmurai. I build production pipelines with Python, Airflow and dbt.';
 
 // Contact is routed exclusively through LinkedIn — no email or phone anywhere
 // on the site, by design. Do not add a mailto: or a contact form here.

@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import PostRow from '../components/PostRow.astro';
 import SocialLinks from '../components/SocialLinks.astro';
-import { CURRENTLY, SITE_DESCRIPTION, SITE_TITLE, TAGLINE } from '../consts';
+import { INTRO, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { PROJECTS } from '../data/projects';
 import { getPublishedPosts } from '../lib/posts';
 
@@ -14,8 +14,8 @@ const featured = PROJECTS.slice(0, 3);
 <Base title={SITE_TITLE} description={SITE_DESCRIPTION} person>
 	<div class="shell">
 		<div class="intro">
-			<h1 class="display">{TAGLINE}</h1>
-			<p class="now">{CURRENTLY}</p>
+			<h1 class="display">{SITE_TITLE}</h1>
+			<p class="now">{INTRO}</p>
 			<SocialLinks variant="labelled" />
 		</div>
 
@@ -62,14 +62,7 @@ const featured = PROJECTS.slice(0, 3);
 
 <style>
 	.intro {
-		max-width: 34ch;
 		padding-block-end: var(--space-md);
-	}
-
-	/* The statement is the only element on the site allowed to run short —
-	   a narrow measure is what makes it read as a statement. */
-	.intro h1 {
-		max-width: 22ch;
 	}
 
 	.now {
@@ -86,7 +79,6 @@ const featured = PROJECTS.slice(0, 3);
 
 	@media (min-width: 48rem) {
 		.intro {
-			max-width: none;
 			padding-block: var(--space-md) var(--space-lg);
 		}
 	}
