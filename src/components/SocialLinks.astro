@@ -1,0 +1,64 @@
+---
+import { SOCIALS } from '../consts';
+import SocialIcon from './SocialIcon.astro';
+
+interface Props {
+	/** `icons` for header/footer chrome, `labelled` for in-page use. */
+	variant?: 'icons' | 'labelled';
+}
+
+const { variant = 'icons' } = Astro.props;
+---
+
+<ul class:list={['socials', variant]}>
+	{
+		SOCIALS.map((social) => (
+			<li>
+				<a href={social.href} rel="me noopener" target="_blank">
+					<SocialIcon icon={social.icon} />
+					{variant === 'labelled' ? (
+						<span>{social.name}</span>
+					) : (
+						<span class="sr-only">{social.name}</span>
+					)}
+				</a>
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	.socials {
+		display: flex;
+		align-items: center;
+		list-style: none;
+		padding: 0;
+	}
+
+	.socials.icons {
+		gap: var(--space-sm);
+	}
+
+	.socials.labelled {
+		gap: var(--space-md);
+		flex-wrap: wrap;
+	}
+
+	a {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2xs);
+		color: var(--fg-muted);
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: var(--accent);
+	}
+
+	.labelled a span {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		letter-spacing: 0.02em;
+	}
+</style>

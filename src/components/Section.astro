@@ -1,0 +1,40 @@
+---
+interface Props {
+	label: string;
+	/** Optional link rendered on the right of the section rule. */
+	moreHref?: string;
+	moreLabel?: string;
+	id?: string;
+}
+
+const { label, moreHref, moreLabel, id } = Astro.props;
+---
+
+<section class="section" id={id}>
+	<div class="section-head">
+		<h2 class="label">{label}</h2>
+		{
+			moreHref && (
+				<a class="mono" href={moreHref}>
+					{moreLabel ?? 'All'} →
+				</a>
+			)
+		}
+	</div>
+	<slot />
+</section>
+
+<style>
+	h2 {
+		/* Section labels are structural, not typographic headings — the
+		   .label token already carries the size and tracking. */
+		font-size: var(--text-2xs);
+		font-weight: 500;
+		line-height: 1.4;
+		letter-spacing: 0.14em;
+	}
+
+	a:hover {
+		color: var(--accent);
+	}
+</style>

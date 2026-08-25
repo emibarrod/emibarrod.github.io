@@ -1,86 +1,117 @@
 ---
-import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
+import Base from './Base.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import type { CollectionEntry } from 'astro:content';
 
-type Props = CollectionEntry<'blog'>['data'];
+interface Props {
+	data: CollectionEntry<'blog'>['data'];
+	readingMinutes: number;
+}
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { data, readingMinutes } = Astro.props;
+const { title, description, pubDate, updatedDate, tags, draft } = data;
 ---
 
-<html lang="es">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
+<Base
+	title={title}
+	description={description}
+	type="article"
+	publishedDate={pubDate}
+	modifiedDate={updatedDate}
+>
+	<article class="shell">
+		<header class="post-head">
+			<p class="mono meta">
+				<FormattedDate date={pubDate} />
+				<span class="sep">·</span>
+				{readingMinutes} min read
+				{
+					draft && (
+						<>
+							<span class="sep">·</span>
+							<span class="draft">draft</span>
+						</>
+					)
+				}
+			</p>
+			<h1>{title}</h1>
+			<p class="lead">{description}</p>
+			{
+				tags.length > 0 && (
+					<ul class="tags">
+						{tags.map((tag) => (
+							<li class="tag">{tag}</li>
+						))}
+					</ul>
+				)
 			}
-			.hero-image {
-				width: 100%;
+			{
+				updatedDate && (
+					<p class="mono updated">
+						Updated <FormattedDate date={updatedDate} />
+					</p>
+				)
 			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+		</header>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							{pubDate && <FormattedDate date={pubDate} />}
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Última actualización el <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
+		<div class="prose">
+			<slot />
+		</div>
+
+		<footer class="post-foot">
+			<a class="mono" href="/blog">← All posts</a>
+		</footer>
+	</article>
+</Base>
+
+<style>
+	.post-head {
+		max-width: var(--measure);
+		padding-block-end: var(--space-lg);
+		margin-block-end: var(--space-lg);
+		border-block-end: 1px solid var(--rule);
+	}
+
+	.post-head h1 {
+		margin-block-start: var(--space-2xs);
+	}
+
+	.post-head .lead {
+		margin-block-start: var(--space-sm);
+	}
+
+	.sep {
+		margin-inline: 0.4em;
+		color: var(--fg-faint);
+	}
+
+	.draft {
+		color: var(--accent);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.tags {
+		margin-block-start: var(--space-md);
+	}
+
+	.updated {
+		margin-block-start: var(--space-sm);
+		color: var(--fg-faint);
+	}
+
+	.post-foot {
+		max-width: var(--measure);
+		margin-block-start: var(--space-2xl);
+		padding-block-start: var(--space-md);
+		border-block-start: 1px solid var(--rule);
+	}
+
+	.post-foot a {
+		text-decoration: none;
+	}
+
+	.post-foot a:hover {
+		color: var(--accent);
+	}
+</style>

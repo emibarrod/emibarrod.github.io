@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+import { PROJECTS } from '../data/projects';
+
+const title = 'Work';
+const description =
+	'Side projects by Emilio Barragán — data pipelines, scraping at scale, and one GPT-powered joke that got out of hand.';
+---
+
+<Base title={title} description={description}>
+	<div class="shell">
+		<header class="page-head">
+			<h1 class="display">Work</h1>
+			<p class="lead measure">
+				Things I built outside of work hours. Some useful, some not.
+			</p>
+		</header>
+
+		<ul class="projects">
+			{
+				PROJECTS.map((project) => (
+					<li class="project">
+						<div class="project-head">
+							<h2>{project.name}</h2>
+							<span class="mono year">
+								{project.year}
+								{project.archived && <span class="archived">archived</span>}
+							</span>
+						</div>
+
+						<p class="summary">{project.summary}</p>
+						{project.detail && <p class="detail">{project.detail}</p>}
+
+						<ul class="tags">
+							{project.tech.map((tech) => (
+								<li class="tag">{tech}</li>
+							))}
+						</ul>
+
+						{project.href && (
+							<a class="mono link" href={project.href} target="_blank" rel="noopener">
+								{project.hrefLabel ?? project.href} →
+							</a>
+						)}
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</Base>
+
+<style>
+	.page-head {
+		padding-block-end: var(--space-lg);
+	}
+
+	.page-head .lead {
+		margin-block-start: var(--space-sm);
+	}
+
+	.projects {
+		list-style: none;
+		padding: 0;
+	}
+
+	.project {
+		border-block-start: 1px solid var(--rule);
+		padding-block: var(--space-lg);
+		max-width: var(--measure);
+	}
+
+	.project-head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-md);
+	}
+
+	.project-head h2 {
+		font-size: var(--text-xl);
+	}
+
+	.year {
+		white-space: nowrap;
+	}
+
+	.archived {
+		margin-inline-start: var(--space-2xs);
+		padding: 0.1em 0.4em;
+		border: 1px solid var(--rule-strong);
+		border-radius: var(--radius);
+		font-size: var(--text-2xs);
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--fg-faint);
+	}
+
+	.summary {
+		margin-block-start: var(--space-2xs);
+	}
+
+	.detail {
+		margin-block-start: var(--space-sm);
+		color: var(--fg-muted);
+		font-size: var(--text-sm);
+	}
+
+	.tags {
+		margin-block-start: var(--space-md);
+	}
+
+	.link {
+		display: inline-block;
+		margin-block-start: var(--space-md);
+		text-decoration: none;
+	}
+
+	.link:hover {
+		color: var(--accent);
+	}
+</style>

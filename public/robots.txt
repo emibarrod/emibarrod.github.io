@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://emibarrod.com/sitemap-index.xml

@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import { SITE_AUTHOR, SOCIALS } from '../consts';
+import {
+	EARLIER_ROLES,
+	EDUCATION,
+	LANGUAGES,
+	ROLES,
+	SUMMARY,
+	TECHNOLOGIES,
+} from '../data/cv';
+
+const title = 'CV';
+const description =
+	'Curriculum vitae of Emilio Barragán Rodríguez — data engineer working with Python, SQL, dbt and Airflow.';
+
+const linkedin = SOCIALS.find((s) => s.name === 'LinkedIn')!;
+---
+
+<Base title={title} description={description}>
+	<div class="shell">
+		<header class="page-head">
+			<h1 class="display">{SITE_AUTHOR}</h1>
+			<p class="lead measure">{SUMMARY}</p>
+			<p class="mono contact">
+				Data Engineer · <a href={linkedin.href} target="_blank" rel="noopener"
+					>linkedin.com/in/emibarrod</a
+				>
+			</p>
+			<p class="mono print-hint no-print">
+				Press ⌘P / Ctrl+P to save this page as a PDF.
+			</p>
+		</header>
+
+		<Section label="Experience">
+			{
+				ROLES.map((role) => (
+					<article class="cv-entry">
+						<div class="entry-head">
+							{/* Explicit spaces: Astro collapses the whitespace between an
+							    expression and an adjacent element. */}
+							<h3>
+								{role.title}{' '}
+								<span class="at">at</span>{' '}
+								{role.company}
+							</h3>
+							<span class="mono when">
+								{role.start} — {role.end}
+							</span>
+						</div>
+						<p class="mono where">{role.location}</p>
+						<ul class="highlights">
+							{role.highlights.map((item) => (
+								<li>{item}</li>
+							))}
+						</ul>
+					</article>
+				))
+			}
+		</Section>
+
+		<Section label="Earlier">
+			<ul class="rows">
+				{
+					EARLIER_ROLES.map((role) => (
+						<li>
+							<div class="row">
+								<span class="row-title earlier-title">
+									{role.title}{' '}
+									<span class="at">at</span>{' '}
+									{role.company}
+								</span>
+								<span class="row-meta mono">{role.period}</span>
+								<span class="row-note">{role.note}</span>
+							</div>
+						</li>
+					))
+				}
+			</ul>
+		</Section>
+
+		<Section label="Education">
+			<ul class="rows">
+				{
+					EDUCATION.map((study) => (
+						<li>
+							<div class="row">
+								<span class="row-title earlier-title">
+									{study.qualification}
+								</span>
+								<span class="row-meta mono">{study.period}</span>
+								<span class="row-note">{study.institution}</span>
+							</div>
+						</li>
+					))
+				}
+			</ul>
+		</Section>
+
+		<div class="two-up">
+			<Section label="Technologies">
+				<ul class="tags">
+					{TECHNOLOGIES.map((tech) => <li class="tag">{tech}</li>)}
+				</ul>
+			</Section>
+
+			<Section label="Languages">
+				<ul class="plain">
+					{
+						LANGUAGES.map((lang) => (
+							<li>
+								{lang.language} <span class="mono">({lang.level})</span>
+							</li>
+						))
+					}
+				</ul>
+			</Section>
+		</div>
+	</div>
+</Base>
+
+<style>
+	.page-head {
+		padding-block-end: var(--space-md);
+	}
+
+	.page-head h1 {
+		font-size: var(--text-3xl);
+	}
+
+	.page-head .lead {
+		margin-block-start: var(--space-sm);
+	}
+
+	.contact {
+		margin-block-start: var(--space-sm);
+	}
+
+	.print-hint {
+		margin-block-start: var(--space-2xs);
+		color: var(--fg-faint);
+	}
+
+	.cv-entry + .cv-entry {
+		border-block-start: 1px solid var(--rule);
+		margin-block-start: var(--space-md);
+		padding-block-start: var(--space-md);
+	}
+
+	.entry-head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-md);
+		flex-wrap: wrap;
+	}
+
+	.entry-head h3 {
+		font-size: var(--text-lg);
+	}
+
+	.at {
+		color: var(--fg-faint);
+		font-weight: 400;
+	}
+
+	.when {
+		white-space: nowrap;
+	}
+
+	.where {
+		margin-block-start: var(--space-3xs);
+		color: var(--fg-faint);
+	}
+
+	.highlights {
+		max-width: var(--measure);
+		margin-block-start: var(--space-sm);
+		padding-inline-start: 1.15em;
+		color: var(--fg-muted);
+		font-size: var(--text-sm);
+	}
+
+	.highlights li + li {
+		margin-block-start: var(--space-3xs);
+	}
+
+	.earlier-title {
+		font-size: var(--text-base);
+		font-weight: 560;
+	}
+
+	.plain {
+		list-style: none;
+		padding: 0;
+	}
+
+	.plain li + li {
+		margin-block-start: var(--space-3xs);
+	}
+
+	.two-up {
+		display: grid;
+		gap: 0 var(--space-xl);
+	}
+
+	@media (min-width: 40rem) {
+		.two-up {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+</style>

@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import { NAV } from '../consts';
+---
+
+<Base
+	title="Not found"
+	description="That page does not exist on emibarrod.com."
+>
+	<div class="shell wrap">
+		<p class="label">404</p>
+		<h1 class="display">This page doesn't exist.</h1>
+		<p class="lead">
+			Wrong URL, or something that used to live here and no longer does. The
+			site was rebuilt, so a few old links did not survive.
+		</p>
+		<ul class="links">
+			<li><a class="mono" href="/">Home</a></li>
+			{
+				NAV.map((item) => (
+					<li>
+						<a class="mono" href={item.href}>
+							{item.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</Base>
+
+<style>
+	.wrap {
+		max-width: var(--measure);
+		padding-block: var(--space-xl);
+	}
+
+	h1 {
+		margin-block-start: var(--space-2xs);
+	}
+
+	.lead {
+		margin-block-start: var(--space-md);
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-md);
+		list-style: none;
+		padding: 0;
+		margin-block-start: var(--space-lg);
+		padding-block-start: var(--space-md);
+		border-block-start: 1px solid var(--rule);
+	}
+
+	.links a {
+		text-decoration: none;
+	}
+
+	.links a:hover {
+		color: var(--accent);
+	}
+</style>

@@ -1,0 +1,31 @@
+---
+import FormattedDate from './FormattedDate.astro';
+import type { Post } from '../lib/posts';
+
+interface Props {
+	post: Post;
+	/** Show the description below the title. */
+	showDescription?: boolean;
+}
+
+const { post, showDescription = true } = Astro.props;
+---
+
+<a class="row" href={`/blog/${post.id}/`}>
+	<span class="row-title">{post.data.title}</span>
+	<span class="row-meta mono">
+		<FormattedDate date={post.data.pubDate} format="short" />
+		{post.data.draft && <span class="draft">draft</span>}
+	</span>
+	{showDescription && <span class="row-note">{post.data.description}</span>}
+</a>
+
+<style>
+	.draft {
+		margin-inline-start: var(--space-2xs);
+		color: var(--accent);
+		text-transform: uppercase;
+		font-size: var(--text-2xs);
+		letter-spacing: 0.1em;
+	}
+</style>
