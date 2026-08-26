@@ -35,13 +35,4 @@ export const PROJECTS: Project[] = [
 			'5,000+ data-related job postings from LinkedIn and 8,000+ data courses from Udemy, collected and stored automatically to see what the market was actually asking for.',
 		tech: ['Python', 'BeautifulSoup', 'Selenium', 'Google Colab'],
 	},
-	{
-		name: 'Writing on LinkedIn',
-		year: 'Ongoing',
-		summary:
-			'Weekly posts on data engineering and career advice, to an audience of 2,000+.',
-		tech: ['Data engineering', 'Careers'],
-		href: 'https://www.linkedin.com/in/emibarrod/',
-		hrefLabel: 'linkedin.com/in/emibarrod',
-	},
 ];
